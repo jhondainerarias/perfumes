@@ -5,7 +5,523 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Fragancias</title>
 <link rel="stylesheet" href ="stiles.css" type="text/css">
-</head>
+</head> 
+    <styles
+    /* --- ESTILOS GENERALES Y RESETEO --- */
+body {
+  background-image: url('imagen/fondo1.jpg'); /* Asegúrate de que esta ruta sea correcta */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #cccccc; /* Color sólido de respaldo */
+  /* Fuentes base para el body si quieres una fuente general para toda la página */
+  /* font-family: sans-serif; */ 
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #000203;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h2, h3,h4{
+  color: #000305;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+/* --- ESTILOS DEL BOTÓN DE WHATSAPP --- */
+.whatsapp-button-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.whatsapp-button {
+  background-color: #25D366; /* Verde de WhatsApp */
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 50px; /* Botón redondeado */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-decoration: none; /* Si es un <a> */
+  display: inline-flex; /* Para alinear el icono y el texto */
+  align-items: center;
+  gap: 10px; /* Espacio entre icono y texto */
+}
+
+.whatsapp-button:hover {
+  background-color: #1DA851; /* Verde más oscuro al pasar el ratón */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.whatsapp-button:active {
+  background-color: #178B41;
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-icon {
+  width: 24px; /* Tamaño del icono */
+  height: 24px;
+}
+.container {
+  /* Fondo con degradado y potencial imagen */
+  /* Nota: tu degradado original 'linear-gradient(1deg, rgba(0.2, 0.3, 0.4, 0.), rgba(228, 224, 224, 0.527))'
+     tiene valores RGB inválidos (0.2, 0.3, 0.4). Lo he ajustado a valores más típicos.
+     Si quieres una imagen de fondo, descomenta la línea de url()
+  */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  /* background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05)), url('ruta/a/tu-imagen-gender-menu.jpg'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Efecto de cristal */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Estilo general */
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px 25px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 400px;
+  color: #f0f0f0;
+  font-family:Victor Mono;
+  text-align: center;
+  line-height: 1.6;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Efecto al pasar el ratón (hover) en gender-menu */
+.container-menu:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* H2 dentro de gender-menu */
+.container h3 {
+  color: #020005;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+}
+.container h1 {
+  color: #000000;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+}
+
+/* --- ESTILOS PARA container2 (Artículo de Fragancias) --- */
+.container1 {
+  /* Fondo con degradado y potencial imagen */
+  /* Nota: tu degradado original 'linear-gradient(1deg, rgba(0.2, 0.3, 0.4, 0.), rgba(228, 224, 224, 0.527))'
+     tiene valores RGB inválidos (0.2, 0.3, 0.4). Lo he ajustado a valores más típicos.
+     Si quieres una imagen de fondo, descomenta la línea de url()
+  */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  /* background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05)), url('ruta/a/tu-imagen-gender-menu.jpg'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Efecto de cristal */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Estilo general */
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px 25px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 400px;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  line-height: 1.6;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Efecto al pasar el ratón (hover) en gender-menu */
+.gender-menu:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* H2 dentro de gender-menu */
+.gender-menu h2 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+/* --- ESTILOS PARA LOS INPUTS DE ID DEL MÓVIL --- */
+.comprador-id-section {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.comprador-id-section label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+}
+
+.comprador-id-section input[type="text"] {
+  padding: 10px 15px;
+  font-size: 1.1em;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  width: calc(100% - 30px);
+  max-width: 250px;
+  box-sizing: border-box;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.comprador-id-section input[type="text"]:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* --- ESTILOS DEL MENÚ de género (botones) --- */
+.gender-menu {
+  /* Fondo con degradado y potencial imagen */
+  /* Nota: tu degradado original 'linear-gradient(1deg, rgba(0.2, 0.3, 0.4, 0.), rgba(228, 224, 224, 0.527))'
+     tiene valores RGB inválidos (0.2, 0.3, 0.4). Lo he ajustado a valores más típicos.
+     Si quieres una imagen de fondo, descomenta la línea de url()
+  */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  /* background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05)), url('ruta/a/tu-imagen-gender-menu.jpg'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Efecto de cristal */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Estilo general */
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px 25px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 400px;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  line-height: 1.6;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Efecto al pasar el ratón (hover) en gender-menu */
+.gender-menu:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* H2 dentro de gender-menu */
+.gender-menu h2 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Párrafos dentro de gender-menu */
+.gender-menu p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+/* Clase para los botones de tamaño y género */
+.menu-button {
+  background-color: #029aff38;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 15px 25px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-button:hover {
+  background-color: #8b09fc;
+  transform: translateY(-3px);
+}
+
+/* Estado 'seleccionado' para los botones de tamaño y género */
+.menu-button.selected {
+  background-color: #e64dc0ce;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 2px solid #dc6af8;
+}
+
+.menu-button:active {
+  background-color: #a847b4;
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* --- ESTILOS para los SELECT (desplegables) --- */
+.opciones-select { /* Contenedor para los select */
+  margin-bottom: 30px;
+  text-align: center;
+  /* El siguiente bloque fue una duplicidad de .message-area, lo he comentado.
+     Si quieres un efecto de cristal aquí, necesitas definirlo como un nuevo estilo
+     para este contenedor, no copiar el de message-area directamente.
+  */
+  /*
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px;
+  margin: 20px auto;
+  width: 95%;
+  max-width: 700px;
+  min-height: 150px;
+  box-sizing: border-box;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  text-align: left;
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+  */
+}
+
+.opciones-select select {
+  padding: 10px 15px;
+  font-size: 1.1em;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f0f8ff; /* Un color de fondo claro para el select */
+  color: #333;
+  width: calc(100% - 30px);
+  max-width: 400px;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: none;
+  appearance: none; /* Elimina estilos nativos del navegador */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Corregido el SVG Data URI: el `;charset=US-ASCII,%3Csvg%20xmlns...` estaba mal.
+     Debe ser 'data:image/svg+xml;charset=UTF-8,...' */
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="292.4" height="292.4" viewBox="0 0 292.4 292.4"%3E%3Cpath fill="%23333" d="M287 69.4a17.6 17.6 0 00-13.4-6.4H18.8a17.6 17.6 0 00-13.4 6.4 17.6 17.6 0 000 14.2l128 127.9a17.6 17.6 0 0024.8 0l128-127.9a17.6 17.6 0 000-14.2z"%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.opciones-select select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* --- ESTILOS DEL área de mensajes --- */
+.message-area {
+  /* La primera definición de .message-area fue básica, la segunda tenía el efecto de cristal.
+     He eliminado la primera y mantenido la segunda, que es más completa. */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px;
+  margin: 20px auto;
+  width: 95%;
+  max-width: 700px;
+  min-height: 150px;
+  box-sizing: border-box;
+  color: #000000; /* Color de texto más oscuro para mayor legibilidad */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  text-align: left; /* Generalmente los mensajes se alinean a la izquierda */
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Efecto hover en message-area */
+.message-area:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* --- RESPONSIVIDAD (Media Queries) --- */
+
+/* Media queries específicas para .container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* Media queries específicas para .container2 */
+@media (max-width: 768px) {
+  .container2 {
+    padding: 30px;
+  }
+  .container2 h1 {
+    font-size: 2.5em;
+  }
+  .container2 h1::after {
+    width: 60px;
+  }
+  .container2 p {
+    font-size: 1em;
+  }
+  .container2 .cta-button {
+    font-size: 1.1em;
+    padding: 12px 25px;
+  }
+}
+@media (max-width: 480px) {
+  .container2 {
+    padding: 20px;
+    margin: 20px auto;
+  }
+  .container2 h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+  .container2 h1::after {
+    width: 50px;
+    height: 2px;
+    margin-top: 8px;
+  }
+  .container2 p {
+    font-size: 0.95em;
+    margin-bottom: 15px;
+  }
+  .container2 .cta-button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+}
+
+/* Media queries específicas para .message-area */
+@media (min-width: 768px) {
+  .message-area {
+    max-width: 650px;
+  }
+}
+@media (min-width: 992px) {
+  .message-area {
+    max-width: 700px;
+  }
+}
+
+/* Media query general (ya estaba, pero ahora bien ubicada y simplificada) */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  /* .container ya tiene sus propias MQ más detalladas, así que se elimina la redundancia aquí.
+     Si aún quieres un padding de 20px solo para .container en 600px, puedes agregarlo.
+  */
+  /* .container {
+       padding: 20px;
+     }
+  */
+  h1 { /* Este h1 es el global, no el del container2 */
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  .comprador-id-section input[type="text"],
+  .opciones-select select {
+    width: 100%;
+    max-width: 100%;
+  }
+  /* Solo si tienes un elemento .tamaño-menu */
+  /* .gender-menu, .tamaño-menu {
+       grid-template-columns: 1fr;
+       gap: 15px;
+     }
+  */
+  .menu-button {
+    padding: 12px 20px;
+    font-size: 1em;
+  }
+  .message-area {
+    font-size: 1em;
+  }
+}
+.imput-tipe{  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 20px;
+  margin: 20px auto;
+  width: 95%;
+  max-width: 700px;
+  min-height: 150px;
+  box-sizing: border-box;
+  color: #000000; /* Color de texto más oscuro para mayor legibilidad */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  text-align: left; /* Generalmente los mensajes se alinean a la izquierda */
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Efecto hover en message-area */
+.imput-type-area:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.4);
+}
+    
+
 <body> 
     <div class="container">
         <h1>Mis Fragancias Jhon Dainer Arias</h1>
