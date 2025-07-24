@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descubre fragancias exclusivas y personales. Donde cada gota cuenta una historia. Encuentra tu esencia perfecta.">
+    <title>Mis Fragancias - Realiza tu Compra</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    
+</head>
+<body>
+    <nav class="menu-flotante">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="dama.html">Dama</a></li>
+            <li><a href="caballero.html">Caballero</a></li>
+            <li><a href="unisex.html">Unisex</a></li>
+            <li><a href="comprar.html">Hacer una Compra</a></li>
+        </ul>
+    </nav>
+</section>
+      <main>
+<section class="attention-grabber">
+    <div class="container">
+        <i class="fas fa-bullhorn attention-icon"></i>
+        <h2>¡Oferta Exclusiva por Tiempo Limitado!</h3>
+        <p>No dejes pasar la oportunidad de adquirir tus fragancias favoritas con un descuento increíble. ¡Stock limitado!</p>
+        <a class="btn btn-attention">Desde $20.000 veinte lukitas </a>
+    </div>
+</section>
+
+        <section class="order-section">
+            <div class="section-card">
+                <h2>1. Ingresa tus datos</h2>
+                <p>Necesitamos tu nombre y número de contacto para coordinar tu pedido.</p>
+                <div class="input-group">
+                    <input type="text" id="nombreInput" placeholder="Tu Nombre Completo" aria-label="Introduce tu nombre">
+                    <input type="tel" id="celularInput" placeholder="Número de Celular (Ej: 3101234567)" aria-label="Número de celular">
+                </div>
+            </div>
+<div class="section-genero">
+    <h2>Selecciona el género</h2>
+    <h3>Elige para quien es.</h3>
+    <div class="gender-options" id="genderSelectionMenu"> 
+        <button class="choice-button gender-dama" data-genero="dama"> 
+            <img src="imagen/icono.png" alt="Icono Dama" width="50" height="50"> Dama
+        </button>
+        <button class="choice-button gender-caballero" data-genero="caballero"> 
+            <img src="imagen/iconohom.png" alt="Icono Caballero" width="50" height="50"> Caballero
+        </button>
+        <button class="choice-button gender-unisex" data-genero="unisex"> 
+            <img src="imagen/icounix.jpg" alt="Icono Unisex" width="50" height="50"> Unisex
+        </button>
+    </div>
+</div>
+            <div class="section-card">
+                <h2> Selecciona tu Perfume por marca o busca en la lista global  </h2>
+                <div class="input-group">
+                    <div id="perfumeByBrandContainer">
+                        <select id="casaSelect" class="styled-select">
+                           </select>
+                        <select id="perfumeSelect" class="styled-select hidden">
+                            <option value="">Selecciona un perfume</option>
+                            </select>
+                    </div>
+
+                    <div class="divider">
+                        <h3>lista global de perfumes </h3>
+                    </div>
+
+                    <select id="perfumeGlobalSelect" class="styled-select">
+                        <option value="">Selecciona un perfume de la lista (Global)</option>
+                        </select>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2> Elige el Tamaño y Precio</h2>
+                <p>Selecciona la presentación que prefieras para tu fragancia.</p>
+                <div class="size-options" id="tamañoMenu">
+                    <button class="choice-button" data-tamaño="pequeño" data-precio="20000">pequeño ($20.000)</button>
+                    <button class="choice-button" data-tamaño="mediano" data-precio="40000">mediano ($40.000)</button>
+                    <button class="choice-button" data-tamaño="grande" data-precio="75000">grande ($75.000)</button>
+                    <button class="choice-button" data-tamaño="extragrande" data-precio="85000">extragrande($85.000)</button>
+                </div>
+            </div>
+
+<div class="section-card">
+    <h2> Selecciona tu Método de Pago</h2>
+    <p>Elige cómo deseas realizar el pago.</p>
+    <div class="payment-options" id="paymentMethodMenu"> 
+        <button class="choice-button payment-nequi" data-metodo="nequi">
+            <img src="imagen\nequi.jpg" alt="Nequi Logo"> Nequi
+        </button>
+        <button class="choice-button payment-cash" data-metodo="efectivo">
+            <i class="bi bi-cash-coin"></i> Efectivo (Contra entrega)
+        </button>
+    </div>
+    <p class="nequi-info hidden" id="nequiInfo">
+        Por favor, envía el valor total de tu pedido al número de Nequi: <strong>313 809 4678</strong>.
+        Incluye tu nombre y el perfume en la descripción del pago.
+    </p>
+</div>
+            
+            <div class="section-card summary-card">
+                <h2 class="summary-title">Resumen de Tu Pedido</h2>
+                <div class="message-area" id="messageArea">
+                    Por favor, completa todos los campos para ver el resumen de tu pedido.
+                </div>
+                <button class="whatsapp-button" id="sendWhatsappButton">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" class="whatsapp-icon">
+                    Enviar Pedido por WhatsApp
+                </button>
+                <p class="final-note">¡Gracias por elegir **Mis Fragancias Jhon Dainer Arias**!</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="comprar.js"></script>
+</body>
+</html>

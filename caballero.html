@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragancias para Caballero - Tu Perfumería</title>
+    <link rel="stylesheet" href="styles.css" type="text/css"> 
+     <style>
+        /* --- ESTILOS GLOBALES Y DE BASE PARA LA PÁGINA DAMA --- */
+        
+        body {
+            /* CORRECCIÓN: Usar barra inclinada hacia adelante (/) en la ruta */
+            /* Si 'fondomujer.jpg' está directamente en la misma carpeta que este HTML, la ruta es solo 'fondomujer.jpg' */
+            /* Si está en una subcarpeta llamada 'imagen', la ruta sería 'imagen/fondomujer.jpg' */
+            background-image: url('imagen/hombre.jpg'); 
+            
+            /* Cubre todo el área disponible sin dejar espacios vacíos */
+            background-size: cover; 
+            
+            /* Centra la imagen en el fondo */
+            background-position: center center; 
+            
+            /* Hace que la imagen se quede fija al hacer scroll */
+            background-attachment: fixed; 
+            
+            /* Opcional: Asegura que el fondo no se repita */
+            background-repeat: no-repeat; 
+
+            /* Opcional: Estilos para que el contenido sea visible y se pueda desplazar */
+            color: #9c9c9c; /* Color de texto blanco para contraste */
+            min-height: 150vh; /* Para asegurar que haya suficiente contenido y puedas hacer scroll */
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Opcional: Algunos estilos básicos para el contenido para que lo veas mejor */
+        header, main, footer {
+            /* Considera aumentar la opacidad (el último número) si el texto no se lee bien */
+            background-color: rgba(240, 239, 239, 0.4); /* Levemente más opaco para mejor lectura */
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+        /* --- Estilos para la tabla de fragancias --- */
+.table-container {
+    max-width: 900px; /* Ancho máximo para la tabla */
+    margin: 40px auto; /* Centra la tabla y da espacio */
+    background: rgba(0, 26, 255, 0.9)/* Fondo blanco casi opaco */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Permite desplazamiento horizontal en pantallas pequeñas */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina el espacio entre las celdas */
+    color: #333; /* Color de texto oscuro para la tabla */
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9f2e8; /* Línea separadora entre filas */
+}
+
+th {
+    background-color: #263bf4; /* Color de cabecera que combine con tus títulos */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 1.1em;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color de fondo para filas pares (efecto cebra) */
+}
+
+tbody tr:hover {
+    background-color: #8ab9ea; /* Color al pasar el ratón por la fila */
+}
+
+td strong {
+    color: #6a1b9a; /* Color para las casas de perfume en negrita */
+}
+
+/* Adaptabilidad de la tabla para pantallas pequeñas */
+@media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block; /* Hace que los elementos de la tabla se comporten como bloques */
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px; /* Oculta la cabecera original en móviles */
+        left: -9999px;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden; /* Asegura que los bordes redondeados se vean bien */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%; /* Espacio para la etiqueta de la columna */
+        text-align: right;
+    }
+
+    td:last-child {
+        border-bottom: none; /* Elimina el borde inferior de la última celda */
+    }
+
+    /* Pseudo-elemento para mostrar la etiqueta de la columna */
+    td:before {
+        content: attr(data-label); /* Usa el atributo data-label como contenido */
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 15px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #880e4f; /* Color de las etiquetas */
+    }
+}
+        
+        h1, h2{
+            font-family: 'Playfair Display', serif; /* Una fuente con serifa para títulos elegantes */
+            color: lab(13.73% 43.33 -51.75); /* Borgoña o morado oscuro para contraste femenino */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+   h3,h4,h5,h5{
+            font-family: 'Playfair Display', serif; /* Una fuente con serifa para títulos elegantes */
+            color: lab(0.39% 2 -1.43); /* Borgoña o morado oscuro para contraste femenino */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 3.5em;
+            padding-top: 80px; /* Espacio para que no se solape con el menú flotante */
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-top: 50px;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: #fd6702; /* Gris oscuro para los párrafos, asegúrate de que contraste con el fondo semi-transparente */
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- CONTENIDO PRINCIPAL: Contenedor General --- */
+        .main-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- SECCIÓN DE PRODUCTOS (GRID) --- */
+        .perfume-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Columnas responsivas */
+            gap: 30px; /* Espacio entre las tarjetas de producto */
+            padding: 30px 0;
+            justify-content: center; /* Centra las tarjetas si no llenan la fila */
+        }
+
+        .perfume-card {
+            background: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente para efecto cristal */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .perfume-card:hover {
+            transform: translateY(-8px); /* Efecto flotante al pasar el ratón */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+        }
+
+        .perfume-card img {
+            max-width: 100%;
+            height: 200px; /* Altura fija para las imágenes */
+            object-fit: contain; /* Mantiene la proporción y cabe dentro del contenedor */
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .perfume-card h3 {
+            font-size: 1.5em;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: #6a1b9a; /* Morado más vibrante */
+        }
+
+        .perfume-card p.description {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+            min-height: 60px; /* Altura mínima para descripciones consistentes */
+            overflow: hidden; /* Oculta el texto si es muy largo */
+            text-overflow: ellipsis; /* Añade puntos suspensivos */
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Limita a 3 líneas */
+            -webkit-box-orient: vertical;
+        }
+
+        .perfume-card .price {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #d81b60; /* Rosa intenso para precios */
+            margin-bottom: 20px;
+        }
+
+        .buy-button {
+            background-color: #ec407a; /* Rosa fuerte */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px; /* Botón más redondeado */
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            text-decoration: none; /* Si es un enlace */
+        }
+
+        .buy-button:hover {
+            background-color: #0509f7fd; /* Rosa más oscuro al pasar el ratón */
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* --- ESTILOS DEL MENÚ FLOTANTE (COPIADOS DE TU CÓDIGO) --- */
+        .menu-flotante {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            left: auto;
+            transform: none;
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 15px 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-flotante:hover {
+            transform: none;
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .menu-flotante ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            width: 100%;
+            justify-content: flex-end;
+        }
+
+        .menu-flotante ul li {
+            list-style: none;
+        }
+
+        .menu-flotante ul li a {
+            background: rgba(255, 255, 255, 0.1);
+            color: #0c0075;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+                        -5px -5px 10px rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease-in-out;
+            white-space: nowrap;
+        }
+
+        .menu-flotante ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.3),
+                        -7px -7px 14px rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-flotante ul li a:active {
+            transform: translateY(0);
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3),
+                        inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Adaptabilidad (Responsive Design) del Menú --- */
+        @media (max-width: 768px) {
+            .menu-flotante {
+                top: 15px;
+                right: 15px;
+                padding: 10px 15px;
+                border-radius: 10px;
+            }
+            .menu-flotante ul {
+                gap: 10px;
+            }
+            .menu-flotante ul li a {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+            h1 {
+                font-size: 2.8em;
+                padding-top: 60px;
+            }
+            h2 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-flotante {
+                top: 10px;
+                right: 10px;
+                padding: 8px 10px;
+                border-radius: 8px;
+                width: auto;
+                left: auto;
+                transform: none;
+            }
+            .menu-flotante ul {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                gap: 8px;
+            }
+            .menu-flotante ul li a {
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
+            h1 {
+                font-size: 2.2em;
+                padding-top: 50px;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .perfume-card {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .perfume-card img {
+                height: 150px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="menu-flotante">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="dama.html">Dama</a></li>
+            <li><a href="caballero.html">Caballero</a></li>
+            <li><a href="unisex.html">Unisex</a></li>
+            <li><a href="comprar.html">Hacer una Compra</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <br>
+        <h2 >perfumeria mis fragancias jhon dainer arias</h2>
+        <h1>Carácter y Presencia: Fragancias para el Caballero Moderno</h1>
+        <h3>Descubre nuestra selecta colección de perfumes masculinos, diseñados para realzar la fuerza, la elegancia y la distinción de cada hombre. Encuentra tu esencia ideal.</h3>
+<section class="article-content">
+    <h3>Explora un mundo de notas cítricas, amaderadas, especiadas y acuáticas, diseñadas para complementar tu estilo y dejar una impresión poderosa. Te invitamos a conocer las prestigiosas casas perfumeras y sus creaciones que forman parte de nuestro exclusivo catálogo para caballero:</h3>
+
+    <ul class="perfume-list"><h3>referencias para caballero  <h3>
+       <table class="perfume-table">
+    <thead>
+        <tr>
+            <th>Casa Perfumera o marca  </th>
+            <th>Perfumes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td data-label="Casa Perfumera">Afnan</td>
+            <td data-label="Perfumes">9PM, 9AM</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Al Haramain</td>
+            <td data-label="Perfumes">Dubai Night</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Animale</td>
+            <td data-label="Perfumes">Animale Men</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Antonio Banderas</td>
+            <td data-label="Perfumes">Blue Seduction, King of Seduction, The Golden Secret</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Armaf</td>
+            <td data-label="Perfumes">Club de Nuit, Mandarin Sky</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Azzaro</td>
+            <td data-label="Perfumes">Azzaro</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Bharara</td>
+            <td data-label="Perfumes">Bharara King, Bharara Onix</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Bvlgari</td>
+            <td data-label="Perfumes">Acqua, Man in Black, Bvlgary Man</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Calvin Klein</td>
+            <td data-label="Perfumes">Eternity, Escape, Ckin2U Men</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Carolina Herrera</td>
+            <td data-label="Perfumes">212 Men NYC, 212 VIP, 212 VIP Black Own, 212 VIP Black Red, Bad Boy, Central Park Men, Prive Men, 212 Heroes Forever Young, CH Men, 212 Sexy Men, 212 Men Acqua</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Cartier</td>
+            <td data-label="Perfumes">Santos</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Chanel</td>
+            <td data-label="Perfumes">Bleu, Allure Sport</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Christian Dior</td>
+            <td data-label="Perfumes">Faharenheit, Sauvage, Sauvage Elixir</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Clinique</td>
+            <td data-label="Perfumes">Clinique Happy</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Creed</td>
+            <td data-label="Perfumes">Aventus, Silver Mountain Water</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Cristiano Ronaldo</td>
+            <td data-label="Perfumes">CR7 Legacy, CR7</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Diesel</td>
+            <td data-label="Perfumes">Bad, Only The Brave, Spirit of The Brave, Plus Men, Diesel Fuel For Life</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Dolce & Gabbana</td>
+            <td data-label="Perfumes">Light Blue, K</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Dumont Paris</td>
+            <td data-label="Perfumes">Nitro Red</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Enrique Iglesias</td>
+            <td data-label="Perfumes">Adrenaline</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Esika</td>
+            <td data-label="Perfumes">Dorsay, Winner Sport</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Faconable</td>
+            <td data-label="Perfumes">Faconable</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Ferrari</td>
+            <td data-label="Perfumes">Escuderia</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Gilles Cantuel</td>
+            <td data-label="Perfumes">Arsenal</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Giorgio Armani</td>
+            <td data-label="Perfumes">Acqua Di Gio, Code, Acqua Di Gio Profumo, Stronger With You</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Givenchy</td>
+            <td data-label="Perfumes">Blue Label Givenchy, Pi</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Gucci</td>
+            <td data-label="Perfumes">Gucci</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Hugo Boss</td>
+            <td data-label="Perfumes">Boss Bottled, Boss Bottled Night, Boss Dark Blue, Boss Energise, Boss Iced, Boss In Motion, Boss Orange, Boss Unlimited, Hugo Boss Red, Hugo XY, Hugo, Boss Bottled Tonic, Just Different, Boss Element, Boss Bottled Elixir</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Issey Miyake</td>
+            <td data-label="Perfumes">Issey Pour Homme, Issey Miyake Sport, Issey Miyake Version 1992</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Jean Paul Gaultier</td>
+            <td data-label="Perfumes">Scandal, Le Male, Ultramale, Le Beau, Le Male Elixir, Le Male Le Parfum, Le Beau Paradise Garden</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Jean Pascal</td>
+            <td data-label="Perfumes">Jean Pascal</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Jesús del Pozo</td>
+            <td data-label="Perfumes">Halloween Men</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Lacoste</td>
+            <td data-label="Perfumes">Lacoste Blanca, Lacoste Essential, Lacoste Noir Negra, Lacoste Red, Lacoste Rouge, Lacoste Bleu, Lacoste Amarilla</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Lattafa</td>
+            <td data-label="Perfumes">Asad, Fakhar Black, Asad Zanzibar, Asad Bourbon, His Confession, Khamrah Dukhan</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Liz Claiborne</td>
+            <td data-label="Perfumes">Curve</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Loewe</td>
+            <td data-label="Perfumes">7 Loewe, Loewe Solo</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Louis Vuitton</td>
+            <td data-label="Perfumes">L’Immensité, Imagination</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Maluma</td>
+            <td data-label="Perfumes">Onix Royalty, Garnet Royalty</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Mercedes Benz</td>
+            <td data-label="Perfumes">Mercedes Benz</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Montblanc</td>
+            <td data-label="Perfumes">Legend, Starwalker, Emblem, Explorer, Explorer Platinum</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Moschino</td>
+            <td data-label="Perfumes">Toy Boy</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Natura</td>
+            <td data-label="Perfumes">Kaiak</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Nautica</td>
+            <td data-label="Perfumes">Náutica Voyage, Nautica Voyage Version 2006</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Orientica</td>
+            <td data-label="Perfumes">Imperial Gold</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Oscar de La Renta</td>
+            <td data-label="Perfumes">Pour Lui</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Paco Rabanne</td>
+            <td data-label="Perfumes">Black XS, One Million Royal, Invictus, Invictus Aqua, Invictus Intense, Invictus Legend, One Million, One Million Lucky, Phantom, Pure XS, Invictus Victory, Black XS Aphrodisiaque, Black XS L'Exces, One Million Golden Oud, One Million Prive, Invictus Parfum, One Million Elixir, One Million Gold Intense, Invictus Platinum</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Parfums de Marly</td>
+            <td data-label="Perfumes">Pegasus, Althair</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Paris Hilton</td>
+            <td data-label="Perfumes">Gold Rush</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Perry Ellis</td>
+            <td data-label="Perfumes">360 Men, 360 Red</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Pino Silvestre</td>
+            <td data-label="Casa Perfumera">Pino Silvestre</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Prada</td>
+            <td data-label="Perfumes">Luna Rossa Ocean, Luna Rossa Carbon</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Ralph Lauren</td>
+            <td data-label="Perfumes">Polo Blue, Polo Red, Polo Ultra Blue</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Rasasi</td>
+            <td data-label="Perfumes">Hawas For Him</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Reyane</td>
+            <td data-label="Perfumes">Insurrection</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Ted Lapidus</td>
+            <td data-label="Perfumes">Lapidus</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Thierry Mugler</td>
+            <td data-label="Perfumes">Angel</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Tom Ford</td>
+            <td data-label="Perfumes">Ombre Leather 16</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Tommy Hilfiger</td>
+            <td data-label="Perfumes">Tommy Boy</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Valentino</td>
+            <td data-label="Perfumes">Valentino Uomo, Born In Roma</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Versace</td>
+            <td data-label="Perfumes">Eros, Eros Flame, Eau Fraiche, Dylan Blue, Blue Jeans, Versace Pour Homme, Eros Energy</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Victorinox</td>
+            <td data-label="Perfumes">Swiss Army</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Viktor & Rolf</td>
+            <td data-label="Perfumes">Spicebomb</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Yanbal</td>
+            <td data-label="Perfumes">Osadia, Solo, Ohm, Temptation, Arom, Adrenaline HM, 43N Paralel</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Yves Saint Laurent</td>
+            <td data-label="Perfumes">Yves, M7</td>
+        </tr>
+        <tr>
+            <td data-label="Casa Perfumera">Zlatan</td>
+            <td data-label="Perfumes">Zlatan Ibrahimovic</td>
+        </tr>
+    </tbody>
+</table>
+</section>
+        <h2 >perfumeria mis fragancias jhon dainer arias</h2>
+
+       </header>
+
+    </body>
+</html>
