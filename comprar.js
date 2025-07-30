@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const nombreInput = document.getElementById('nombreInput');
     const celularInput = document.getElementById('celularInput');
 
-    // NUEVOS ELEMENTOS para la selección por casa/marca
-    const containerPerfumeByBrand = document.getElementById('perfumeByBrandContainer'); // Nuevo contenedor
-    const casaSelect = document.getElementById('casaSelect'); // Selector de Casa/Marca
-    const perfumeSelect = document.getElementById('perfumeSelect'); // Selector de Perfumes por Casa
+    // Elementos para la selección por casa/marca
+    const containerPerfumeByBrand = document.getElementById('perfumeByBrandContainer');
+    const casaSelect = document.getElementById('casaSelect');
+    const perfumeSelect = document.getElementById('perfumeSelect');
 
     // Elemento existente para la lista global
     const perfumeGlobalSelect = document.getElementById('perfumeGlobalSelect');
@@ -15,19 +15,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const tamañoButtons = document.querySelectorAll('#tamañoMenu .choice-button');
     const paymentMethodButtons = document.querySelectorAll('#paymentMethodMenu .choice-button');
     const nequiInfo = document.getElementById('nequiInfo');
+    const creditInfo = document.getElementById('creditInfo'); // Referencia al mensaje de crédito/plazos
     const sendWhatsappButton = document.getElementById('sendWhatsappButton');
-    const genderButtons = document.querySelectorAll('#genderSelectionMenu .choice-button');
+    // const genderButtons = document.querySelectorAll('#genderSelectionMenu .choice-button'); // Esta línea se elimina, ya no es un selector
 
     // --- 2. Variables de Estado del Pedido ---
-    // selectedPerfume ya no es estrictamente necesario como variable global para almacenar el valor.
-    // Lo obtendremos directamente de los selects al momento de actualizar el resumen/enviar WhatsApp.
     let selectedTamaño = '';
     let selectedPrecio = 0;
     let selectedMetodoPago = '';
-    let selectedGender = '';
+    // let selectedGender = ''; // Esta variable se elimina, ya no hay selección de género en el UI
 
     // --- 3. Datos de Perfumes (¡Mantener esta estructura!) ---
-    // Las claves del objeto deben coincidir con los "value" de las opciones en el select de casas.
     const perfumesData = {
         "afnan": ["9am pour dama", "9pm pour dama", "9pm men"],
         "agataruizdelaprada": ["Gotas de color dama"],
@@ -125,29 +123,29 @@ document.addEventListener('DOMContentLoaded', function() {
         "yanbal": ["Gaia dama", "Osadia dama", "Ccori Rosé dama", "Ccori dama", "Ohm Black Caballero", "Celos dama", "Cielo dama", "Temptation Dama", "Temptation Men", "Osadia Men", "Solo Men", "Ohm Men", "Arom Men", "Adrenaline HM Men", "43n Parallel Men"],
         "yvessaintlaurent": ["M7 Men", "Yves Men"],
         "zlatan": ["Zlatan Ibrahimović Men"],
-"afnan": ["9am unisex", "9pm rebel unisex"],
-"alharamain": ["Al Haramain Amber Oud Unisex", "Amber Oud Gold Unisex", "Amber Rouge Unisex", "Amber Oud Blue Edition Unisex"],
-"bond n°9": ["Bleecker Street Unisex"],
-"calvin klein": ["CK One Unisex"],
-"creed": ["Centaurus Unisex"],
-"giardini di toscana": ["Bianco Latte Unisex"],
-"ilmin": ["Il Femme Unisex", "Il Kakuno Unisex", "Il Ego Unisex", "Il Dolce Unisex", "Il Orgasme Unisex", "Il Erotique Unisex"],
-"killian": ["Black Phantom Unisex"],
-"lattafa": ["Bade'e Al Oud Amethyst Unisex", "Bade'e Al Oud Oud For Glory Unisex", "Khamrah Unisex", "Shaheen Gold Unisex", "Honor y Glory Unisex", "Nebras Unisex", "Ajwad Unisex", "Khamrah Qahwa Unisex", "Emeer Unisex", "Affection Unisex"],
-"le labo": ["Santal 33 Unisex"],
-"lorenzo pazzaglia": ["Summer Hammer Unisex"],
-"louis vuitton": ["Ombre Nomade Unisex", "Pacific Chill Unisex"],
-"maison francis k": ["Baccarat Rouge Unisex"],
-"mancera": ["Red Tobaco Unisex", "Amore Café Unisex"],
-"montale": ["Intense Café Unisex", "Starry Night Unisex", "Arabians Tonka Unisex", "Chocolate Greedy Unisex", "Day Dream Unisex"],
-"orientica": ["Amber Rouge Unisex", "Royal Amber Unisex", "Oud Saffron Unisex", "Royal Bleu Unisex", "Azure Fantasy Unisex", "Velvet Gold Unisex"],
-"orto parisi": ["Megamare Unisex"],
-"parfums de marly": ["Layton Unisex", "Kalan Unisex"],
-"roger & gallet": ["Marie Farina Unisex"],
-"tiziana terenzi": ["Kirke Unisex", "Cassiopea Unisex"],
-"tom ford": ["Tobacco Vanille Unisex"],
-"xerjoff": ["XJ 1861 Naxos Unisex", "Alexandria II Unisex", "Erba Pura Unisex"]
- };
+        "afnan": ["9am unisex", "9pm rebel unisex"],
+        "alharamain": ["Al Haramain Amber Oud Unisex", "Amber Oud Gold Unisex", "Amber Rouge Unisex", "Amber Oud Blue Edition Unisex"],
+        "bond n°9": ["Bleecker Street Unisex"],
+        "calvin klein": ["CK One Unisex"],
+        "creed": ["Centaurus Unisex"],
+        "giardini di toscana": ["Bianco Latte Unisex"],
+        "ilmin": ["Il Femme Unisex", "Il Kakuno Unisex", "Il Ego Unisex", "Il Dolce Unisex", "Il Orgasme Unisex", "Il Erotique Unisex"],
+        "killian": ["Black Phantom Unisex"],
+        "lattafa": ["Bade'e Al Oud Amethyst Unisex", "Bade'e Al Oud Oud For Glory Unisex", "Khamrah Unisex", "Shaheen Gold Unisex", "Honor y Glory Unisex", "Nebras Unisex", "Ajwad Unisex", "Khamrah Qahwa Unisex", "Emeer Unisex", "Affection Unisex"],
+        "le labo": ["Santal 33 Unisex"],
+        "lorenzo pazzaglia": ["Summer Hammer Unisex"],
+        "louis vuitton": ["Ombre Nomade Unisex", "Pacific Chill Unisex"],
+        "maison francis k": ["Baccarat Rouge Unisex"],
+        "mancera": ["Red Tobaco Unisex", "Amore Café Unisex"],
+        "montale": ["Intense Café Unisex", "Starry Night Unisex", "Arabians Tonka Unisex", "Chocolate Greedy Unisex", "Day Dream Unisex"],
+        "orientica": ["Amber Rouge Unisex", "Imperial Gold Men", "Royal Amber Unisex", "Oud Saffron Unisex", "Royal Bleu Unisex", "Azure Fantasy Unisex", "Velvet Gold Unisex"],
+        "orto parisi": ["Megamare Unisex"],
+        "parfums de marly": ["Layton Unisex", "Kalan Unisex"],
+        "roger & gallet": ["Marie Farina Unisex"],
+        "tiziana terenzi": ["Kirke Unisex", "Cassiopea Unisex"],
+        "tom ford": ["Tobacco Vanille Unisex"],
+        "xerjoff": ["XJ 1861 Naxos Unisex", "Alexandria II Unisex", "Erba Pura Unisex"]
+    };
 
     // --- Funciones de Utilidad ---
 
@@ -164,7 +162,25 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateOrderSummary() {
         const nombre = nombreInput.value.trim();
         const celular = celularInput.value.trim();
-        const metodoPagoText = selectedMetodoPago === 'nequi' ? 'Nequi' : (selectedMetodoPago === 'efectivo' ? 'Efectivo (Contra entrega)' : 'No seleccionado');
+        
+        let metodoPagoText = '';
+        let additionalCostMessage = ''; // Mensaje para el costo adicional
+
+        // Define el costo adicional fijo para crédito/plazos
+        const costoAdicionalCredito = 5000;
+
+        // Determinar el texto del método de pago y el mensaje adicional
+        if (selectedMetodoPago === 'nequi') {
+            metodoPagoText = 'Nequi';
+        } else if (selectedMetodoPago === 'efectivo') {
+            metodoPagoText = 'Efectivo (Contra entrega)';
+        } else if (selectedMetodoPago === 'credito') { // Nuevo caso para "Crédito o Plazos"
+            metodoPagoText = 'Crédito o Plazos';
+            // Incluye el costo adicional en el mensaje del resumen
+            additionalCostMessage = ` (con costo adicional de ${formatPrice(costoAdicionalCredito)})`;
+        } else {
+            metodoPagoText = 'No seleccionado';
+        }
 
         let finalPerfumeDisplay = '';
         let isPerfumeSelected = false;
@@ -185,8 +201,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let allRequiredFieldsSelected = false;
 
         // Condición para habilitar el botón de WhatsApp y mostrar el resumen completo
-        if (nombre && celular && isPerfumeSelected && selectedTamaño && selectedMetodoPago && selectedGender) {
-            message = `¡Excelente, ${nombre}! Tu pedido de **${finalPerfumeDisplay}** en **${selectedTamaño.charAt(0).toUpperCase() + selectedTamaño.slice(1)}** (precio: ${formatPrice(selectedPrecio)}) para **${selectedGender.charAt(0).toUpperCase() + selectedGender.slice(1)}** con pago **${metodoPagoText}** está listo.\n\nPresiona "Enviar Pedido por WhatsApp" para confirmar.`;
+        // Se ha eliminado 'selectedGender' de la validación ya que no es un campo a seleccionar
+        if (nombre && celular && isPerfumeSelected && selectedTamaño && selectedMetodoPago) {
+            message = `¡Excelente, ${nombre}! Tu pedido de **${finalPerfumeDisplay}** en **${selectedTamaño.charAt(0).toUpperCase() + selectedTamaño.slice(1)}** (precio: ${formatPrice(selectedPrecio)}) con pago **${metodoPagoText}${additionalCostMessage}** está listo.\n\nPresiona "Enviar Pedido por WhatsApp" para confirmar.`;
             allRequiredFieldsSelected = true;
         } else {
             message = 'Por favor, completa todos los campos para ver el resumen de tu pedido.';
@@ -286,19 +303,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Selección de Perfume por Casa
-    perfumeSelect.addEventListener('change', function() {
-        updateOrderSummary();
-    });
+    perfumeSelect.addEventListener('change', updateOrderSummary);
 
-    // Selección de Género
-    genderButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            genderButtons.forEach(btn => btn.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedGender = this.dataset.genero;
-            updateOrderSummary();
-        });
-    });
+    // --- Selección de Género: SE HA ELIMINADO LA LÓGICA DE SELECCIÓN ---
+    // Los botones de género ahora son solo informativos en el HTML,
+    // por lo tanto, no necesitan un event listener aquí.
+    // La variable 'selectedGender' y su uso en el resumen también se eliminan.
 
     // Selección de Tamaño
     tamañoButtons.forEach(button => {
@@ -318,10 +328,14 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('selected');
             selectedMetodoPago = this.dataset.metodo;
 
+            // Lógica para mostrar/ocultar información de pago
+            nequiInfo.classList.add('hidden');
+            creditInfo.classList.add('hidden'); // Ocultar siempre el de crédito primero
+
             if (selectedMetodoPago === 'nequi') {
                 nequiInfo.classList.remove('hidden');
-            } else {
-                nequiInfo.classList.add('hidden');
+            } else if (selectedMetodoPago === 'credito') { // Si es crédito, mostrar el mensaje de costo adicional
+                creditInfo.classList.remove('hidden');
             }
             updateOrderSummary();
         });
@@ -339,15 +353,29 @@ document.addEventListener('DOMContentLoaded', function() {
             finalPerfume = `${perfumeSelect.options[perfumeSelect.selectedIndex].textContent} (${casaSelect.options[casaSelect.selectedIndex].textContent})`;
         }
 
-        if (!nombre || !celular || !finalPerfume || !selectedTamaño || !selectedMetodoPago || !selectedGender) {
-            alert("Por favor, completa todos los campos del pedido (nombre, celular, perfume, tamaño, género y método de pago) antes de enviar.");
+        // Se ha eliminado 'selectedGender' de la validación
+        if (!nombre || !celular || !finalPerfume || !selectedTamaño || !selectedMetodoPago) {
+            alert("Por favor, completa todos los campos del pedido (nombre, celular, perfume, tamaño y método de pago) antes de enviar.");
             return;
         }
 
-        const metodoPagoText = selectedMetodoPago === 'nequi' ? 'Nequi' : 'Efectivo (Contra entrega)';
+        let metodoPagoText = '';
+        let whatsappAdditionalMessage = '';
+        const costoAdicionalCredito = 5000; // Define el costo adicional fijo
 
+        if (selectedMetodoPago === 'nequi') {
+            metodoPagoText = 'Nequi';
+        } else if (selectedMetodoPago === 'efectivo') {
+            metodoPagoText = 'Efectivo (Contra entrega)';
+        } else if (selectedMetodoPago === 'credito') {
+            metodoPagoText = 'Crédito o Plazos';
+            // Construye el mensaje con el costo adicional fijo
+            whatsappAdditionalMessage = `\n\nTen en cuenta que con la opción de pago Crédito o Plazos tiene un costo adicional de ${formatPrice(costoAdicionalCredito)} en cualquier presentación.`;
+        }
+        
         const whatsappNumber = '573138094678';
-        const whatsappMessage = `Hola, mi nombre es ${nombre}. Estoy interesado(a) en el perfume "${finalPerfume}" de ${selectedTamaño.charAt(0).toUpperCase() + selectedTamaño.slice(1)} para ${selectedGender.charAt(0).toUpperCase() + selectedGender.slice(1)} por ${formatPrice(selectedPrecio)}. Mi método de pago es ${metodoPagoText}. Mi número de celular es ${celular}. Por favor, confírmame el pedido.`;
+        // El mensaje de WhatsApp ya no incluye selectedGender
+        const whatsappMessage = `Hola, mi nombre es ${nombre}. Estoy interesado(a) en el perfume "${finalPerfume}" de ${selectedTamaño.charAt(0).toUpperCase() + selectedTamaño.slice(1)} por ${formatPrice(selectedPrecio)}. Mi método de pago es ${metodoPagoText}.${whatsappAdditionalMessage} Mi número de celular es ${celular}. Por favor, confírmame el pedido.`;
 
         const encodedMessage = encodeURIComponent(whatsappMessage);
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
@@ -368,13 +396,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         tamañoButtons.forEach(btn => btn.classList.remove('selected'));
         paymentMethodButtons.forEach(btn => btn.classList.remove('selected'));
-        genderButtons.forEach(btn => btn.classList.remove('selected'));
+        // genderButtons.forEach(btn => btn.classList.remove('selected')); // Se elimina el reseteo de los botones de género
         nequiInfo.classList.add('hidden');
+        creditInfo.classList.add('hidden'); // Ocultar también el mensaje de crédito
 
         selectedTamaño = '';
         selectedPrecio = 0;
         selectedMetodoPago = '';
-        selectedGender = '';
+        // selectedGender = ''; // Se elimina la variable de estado
         updateOrderSummary();
     });
 
