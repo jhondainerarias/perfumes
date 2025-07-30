@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,7 +33,7 @@
         <i class="fas fa-bullhorn attention-icon"></i>
         <h2>¡Oferta Exclusiva por Tiempo Limitado!</h3>
         <p>No dejes pasar la oportunidad de adquirir tus fragancias favoritas con un descuento increíble. ¡Stock limitado!</p>
-        <a class="btn btn-attention">Desde $20.000  </a>
+        <a class="btn btn-attention">Desde $20.000 </a>
     </div>
 </section>
 
@@ -46,18 +47,18 @@
                 </div>
             </div>
 <div class="section-genero">
-    <h2>Selecciona el género</h2>
-    <h3>Elige para quien es.</h3>
-    <div class="gender-options" id="genderSelectionMenu"> 
-        <button class="choice-button gender-dama" data-genero="dama"> 
-            <img src="imagen/icono.png" alt="Icono Dama" width="50" height="50"> Dama
-        </button>
-        <button class="choice-button gender-caballero" data-genero="caballero"> 
-            <img src="imagen/iconohom.png" alt="Icono Caballero" width="50" height="50"> Caballero
-        </button>
-        <button class="choice-button gender-unisex" data-genero="unisex"> 
+    <h2>Guía de Género</h2>
+    <h3>Así están categorizados nuestros perfumes:</h3>
+    <div class="gender-options" id="genderInfoDisplay"> 
+        <div class="choice-button gender-dama"> 
+            <img src="imagen/made.jpg" alt="Icono Dama" width="50" height="50"> Dama
+        </div>
+        <div class="choice-button gender-caballero"> 
+            <img src="imagen/iconohom.png" alt="Icono Caballero" width="50" height="50"> Men (Caballero)
+        </div>
+        <div class="choice-button gender-unisex"> 
             <img src="imagen/icounix.jpg" alt="Icono Unisex" width="50" height="50"> Unisex
-        </button>
+        </div>
     </div>
 </div>
             <div class="section-card">
@@ -76,7 +77,7 @@
                     </div>
 
                     <select id="perfumeGlobalSelect" class="styled-select">
-                        <option value="">Selecciona un perfume de la lista (Global)</option>
+                        <option value="">mira la lista(Global) de perfumes </option>
                         </select>
                 </div>
             </div>
@@ -87,25 +88,30 @@
                 <div class="size-options" id="tamañoMenu">
                     <button class="choice-button" data-tamaño="pequeño" data-precio="20000">pequeño ($20.000)</button>
                     <button class="choice-button" data-tamaño="mediano" data-precio="40000">mediano ($40.000)</button>
-                    <button class="choice-button" data-tamaño="grande" data-precio="75000">grande ($75.000)</button>
-                    <button class="choice-button" data-tamaño="extragrande" data-precio="85000">extragrande($85.000)</button>
+                    <button class="choice-button" data-tamaño="grande" data-precio="75000">grande ($70.000)</button>
                 </div>
             </div>
 
 <div class="section-card">
-    <h2> Selecciona tu Método de Pago</h2>
-    <p>Elige cómo deseas realizar el pago.</p>
+    <h2>Selecciona tu Método de Pago</h2>
+    <p>Elige cómo deseas realizar el pago.... ! importante si el pago es a plazo tiene un costo adicional de $ 5.000 en cualquier tamaño ¡</p>
     <div class="payment-options" id="paymentMethodMenu"> 
         <button class="choice-button payment-nequi" data-metodo="nequi">
             <img src="imagen\nequi.jpg" alt="Nequi Logo"> Nequi
         </button>
         <button class="choice-button payment-cash" data-metodo="efectivo">
-            <i class="bi bi-cash-coin"></i> Efectivo (Contra entrega)
+            <i class="bi bi-cash-coin"></i> Efectivo (Contra entrega) 
+        </button>
+        <button class="choice-button payment-credit" data-metodo="credito">
+            <i class="bi bi-credit-card"></i> Crédito o Plazos (tiene un costo adicional)
         </button>
     </div>
     <p class="nequi-info hidden" id="nequiInfo">
         Por favor, envía el valor total de tu pedido al número de Nequi: <strong>313 809 4678</strong>.
         Incluye tu nombre y el perfume en la descripción del pago.
+    </p>
+    <p class="credit-info hidden" id="creditInfo">
+        El pago a crédito o plazos tiene un **costo adicional** de $5.000 en su compra, en el tamaño que elijas.
     </p>
 </div>
             
