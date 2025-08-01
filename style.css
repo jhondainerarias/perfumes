@@ -1,4 +1,5 @@
 
+ 
         /* Variables CSS para una gestión de colores más sencilla */
         :root {
             --primary-color: #000200; /* negro oscuro para texto principal y elementos clave */
@@ -761,4 +762,8 @@
                 height: 20px;
             }
         }
+        a {
+    text-decoration: none;
+}
+
     
