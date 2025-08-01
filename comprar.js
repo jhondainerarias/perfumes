@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "onedirection": ["Our Moment dama"],
         "orientica": ["Amber Rouge Unisex", "Imperial Gold Men", "Royal Amber Unisex", "Oud Saffron Unisex ", "Royal Bleu Unisex", "Azure Fantasy Unisex", "Velvet Gold Unisex"],
         "oscardelarenta": ["Pour Lui Men"],
-        "pacorabanne": ["Black XS dama", "Lady Million Royal dama ", "Lady Million dama ", "Olympea dama", "Olympea Aqua dama", "Fame dama", "1 Million Men", "Invictus Men ", "One Million Royal Men", "Invictus Aqua Men", "Invictus Intense Men", "Invictus Legend Men", "One Million Luky Men", "Phantom Men", "Pure XS Men", "Invictus Victori Men", "Black XS Aphrodisiaque Men", "Black XS L Exces Men", "One Million Golden Oud Men", "One Million Prive Men", "Invictus Parfum Men", "One Million Elixir Men", "One Million Intense Men", "Invictus Platinum Men"],
+        "pacorabanne": ["Black XS dama", "Lady Million Royal dama ", "Lady Million dama ", "Olympea dama", "Olympea Aqua dama", "Fame dama", "1 Million Men", "Invictus Men ", "One Million Royal Men", "Invictus Aqua Men", "Invictus Intense Men", "Invictus Legend Men", "One Million Luky Men", "Phantom Men", "Pure XS Men", "Invictus Victori Men", "Black XS Aphrodisiaque Men", "Black XS L Exces Men", "One Million Golden Oud Men", "One Million Prive Men", "Invictus Parfum Men", "One Million Elixir Men", "Invictus Platinum Men"],
         "parfumsdemarly": ["Delina dama", "Althair Men", "Pegasus Men "],
         "parishilton": ["Can Can dama ", "Can Can Burlesque dama", "Gold Rush dama", "Heires dama", "Paris Hilton dama", "Dazzle dama", "Passport In Paris dama", "Rose Rush dama", "Gold Rush Men", "Paris Hilton Men", "Men"],
         "perryellis": ["360 Coral dama", "360 Mujer", "360 Red Men", "360 Men"],
@@ -358,6 +358,13 @@ document.addEventListener('DOMContentLoaded', function() {
             alert("Por favor, completa todos los campos del pedido (nombre, celular, perfume, tamaño y método de pago) antes de enviar.");
             return;
         }
+        
+        // --- AQUÍ SE DISPARA EL CONFETI ---
+        confetti({
+            particleCount: 900,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
 
         let metodoPagoText = '';
         let whatsappAdditionalMessage = '';
@@ -406,6 +413,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // selectedGender = ''; // Se elimina la variable de estado
         updateOrderSummary();
     });
+
+    // --- Incluimos la biblioteca del confeti ---
+    // NOTA: Esta línea debe ir en tu HTML, en el <head> o justo antes de </body>.
+    // <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     // --- 7. Inicializar al Cargar la Página ---
     populateGlobalPerfumeSelect(); // Llama a la función para llenar el select global
