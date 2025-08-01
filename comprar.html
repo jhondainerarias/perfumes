@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,10 +19,6 @@
     <nav class="menu-flotante">
         <ul>
             <li><a href="index.html">Inicio</a></li>
-            <li><a href="dama.html">Dama</a></li>
-            <li><a href="caballero.html">Caballero</a></li>
-            <li><a href="unisex.html">Unisex</a></li>
-            <li><a href="comprar.html">Hacer una Compra</a></li>
         </ul>
     </nav>
 </section>
@@ -32,11 +27,34 @@
     <div class="container">
         <i class="fas fa-bullhorn attention-icon"></i>
         <h2>BIENVENIDO A LA PAGINA DE COMPRAS </h3>
-        <p>todo esta listo para ti Descubre fragancias exclusivas y personales. Donde cada gota cuenta una historia. Encuentra tu esencia perfecta. </p>
-        <a class="btn btn-attention"> desde 20 mil pesos   </a>
+        <h1>todo esta listo para ti  </h1>
+       <a class="btn btn-attention" id="botonConfeti">
+    desde 20 mil pesos
+</a>
     </div>
 </section>
+<div class="section-genero">
+    <h2>no sabes de perfumes ?</h2>
+    <h3>Así están categorizados nuestros perfumes:</h3>
+    <p>al hacer clik sobre estas opciones te llevara a una lista de perfumes  para cada genero   </p>
+  <a href="dama.html">
+    <div class="choice-button gender-dama">
+        <img src="imagen/made.jpg" alt="Icono Dama" width="50" height="50"> Dama
+    </div>
+</a>
+<a href="caballero.html">
+        <div class="choice-button gender-caballero"> 
+            <img src="imagen/iconohom.png" alt="Icono Caballero" width="50" height="50"> Men (Caballero)
+        </div>
+    </a>
+    <a href="unisex.html">
 
+        <div class="choice-button gender-unisex"> 
+            <img src="imagen/icounix.jpg" alt="Icono Unisex" width="50" height="50"> Unisex
+        </div>
+        </a>
+    </div>
+</div>
         <section class="order-section">
             <div class="section-card">
                 <h2>1. Ingresa tus datos</h2>
@@ -46,21 +64,7 @@
                     <input type="tel" id="celularInput" placeholder="Número de Celular (Ej: 3101234567)" aria-label="Número de celular">
                 </div>
             </div>
-<div class="section-genero">
-    <h2>Guía de Género</h2>
-    <h3>Así están categorizados nuestros perfumes:</h3>
-    <div class="gender-options" id="genderInfoDisplay"> 
-        <div class="choice-button gender-dama"> 
-            <img src="imagen/icono.png" alt="Icono Dama" width="50" height="50"> Dama
-        </div>
-        <div class="choice-button gender-caballero"> 
-            <img src="imagen/iconohom.png" alt="Icono Caballero" width="50" height="50"> Men (Caballero)
-        </div>
-        <div class="choice-button gender-unisex"> 
-            <img src="imagen/icounix.jpg" alt="Icono Unisex" width="50" height="50"> Unisex
-        </div>
-    </div>
-</div>
+
             <div class="section-card">
                 <h2> Selecciona tu Perfume por marca o busca en la lista global  </h2>
                 <div class="input-group">
@@ -128,7 +132,7 @@
             </div>
         </section>
     </div>
-
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="comprar.js"></script>
 </body>
 </html>
