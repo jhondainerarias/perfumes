@@ -482,7 +482,6 @@
         .marquee-container {
             width: 100%;
             overflow: hidden; /* Oculta el texto que se sale del contenedor */
-            background: linear-gradient(to right, #0568fd, #D4AF37); /* Degradado llamativo */
             color: var(--white);
             padding: 15px 0;
             border-radius: 10px;
@@ -640,7 +639,67 @@
             .marquee-text {
                 font-size: 1.5em; /* Ajusta el tamaño de fuente del marquee */
             }
-        }
+        }/* --- 2. Sección de Marcas (Marquee) --- */
+.marquee-section {
+    padding: 40px 0;
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.marquee-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.marquee-text {
+    display: inline-block;
+    animation: marquee-animation 30s linear infinite; /* Controla la velocidad del carrusel */
+    padding-right: 50px; /* Espacio para que el carrusel sea fluido */
+}
+
+.marquee-text img {
+    width: 150px;
+    height: 80px;
+    object-fit: contain;
+    margin: 0 50px;
+    /* Comenta las siguientes líneas para que se muestren a color */
+    /* filter: grayscale(100%); */
+    /* opacity: 0.6; */
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.marquee-text img:hover {
+    /* Comenta esta clase completa */
+    /* filter: grayscale(0%); */
+    /* opacity: 1; */
+}
+@keyframes marquee-animation {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.marquee-text {
+    display: inline-block;
+    animation: marquee-animation 30s linear infinite; /* Controla la velocidad del carrusel */
+    padding-right: 50px;
+}
+
+@keyframes marquee-animation {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
 
         @media (max-width: 480px) { /* Para teléfonos móviles */
             .hero-content h1 {
@@ -697,86 +756,59 @@
         <h2>¡Oferta Exclusiva por Tiempo Limitado!</h3>
      <h3>preparamos fragancias, en singles genericos, de bajo costo para mayor economia, la fragancia, el envase, y el tamaño que elijas  </h2>
         <p>No dejes pasar la oportunidad de adquirir tus fragancias favoritas con un descuento increíble. ¡Stock limitado!</p>
-        <a href="comprar.html" class="btn btn-attention">Desde $20.000  </a>
+        <a href="comprar.html" class="btn btn-attention">Desde $20.000 </a>
     </div>
 </section>
-        <section class="marquee-section" id="marcas">
-            <h1>Marcas Disponibles <i class="fas fa-star"></i></h1> 
+      <section class="marquee-section" id="marcas">
+        <div class="container">
+            <h1>Marcas Destacadas <i class="fas fa-star"></i></h1>
             <div class="marquee-container">
                 <div class="marquee-text">
-                    <span>Carolina Herrera</span><span>Yambal</span><span>Lattafa</span><span>Afna</span><span>Ágatha Ruiz de la Prada</span><span>Ahli</span><span>Antonio Banderas</span><span>Ariana Grande</span><span>Armaf</span><span>Arrurú</span><span>Bath & Body Works</span><span>Benetton</span><span>Bharara</span><span>Britney Spears</span><span>Bvlgari</span><span>Calvin Klein</span><span>Cartier</span>
-                    <span>Dolce & Gabbana</span><span>Escada</span><span>Fred Hayman</span><span>Giorgio Armani</span><span>Givenchy</span><span>Illumen</span><span>Issey Miyake</span><span>Jean Paul Gaultier</span><span>Jesús del Pozo</span><span>Justin Bieber</span><span>Katy Perry</span><span>Kim Kardashian</span><span>Lacoste</span><span>Maluma</span><span>Moschino</span><span>One Direction</span><span>Parfum de Marly</span><span>Paco Rabanne</span><span>Paris Hilton</span><span>Perry Ellis</span><span>Ralph Lauren</span><span>Selena Gomez</span><span>Sofía Vergara</span><span>Thierry Mugler</span><span>Tommy Hilfiger</span><span>Valentino</span><span>Victoria's Secret</span><span>Chanel</span><span>Dior</span><span>Gucci</span><span>Versace</span><span>Hugo Boss</span>
-                    <span>Carolina Herrera</span><span>Yambal</span><span>Lattafa</span><span>Afna</span><span>Ágatha Ruiz de la Prada</span><span>Ahli</span><span>Antonio Banderas</span><span>Ariana Grande</span><span>Armaf</span><span>Arrurú</span><span>Bath & Body Works</span><span>Benetton</span><span>Bharara</span><span>Britney Spears</span><span>Bvlgari</span><span>Calvin Klein</span><span>Cartier</span>
-                    <span>Dolce & Gabbana</span><span>Escada</span><span>Fred Hayman</span><span>Giorgio Armani</span><span>Givenchy</span><span>Illumen</span><span>Issey Miyake</span><span>Jean Paul Gaultier</span><span>Jesús del Pozo</span><span>Justin Bieber</span><span>Katy Perry</span><span>Kim Kardashian</span><span>Lacoste</span><span>Maluma</span><span>Moschino</span><span>One Direction</span><span>Parfum de Marly</span><span>Paco Rabanne</span><span>Paris Hilton</span><span>Perry Ellis</span><span>Ralph Lauren</span><span>Selena Gomez</span><span>Sofía Vergara</span><span>Thierry Mugler</span><span>Tommy Hilfiger</span><span>Valentino</span><span>Victoria's Secret</span><span>Chanel</span><span>Dior</span><span>Gucci</span><span>Versace</span><span>Hugo Boss</span>
+                    <img src="img\9pm.webp " alt="Logo">
+                    <img src="img\ahli.jpg " alt="Logo">
+                     <img src="img\alhara.jpg " alt="Logo">
+                    <img src="img\anilame.jpg " alt="Logo">
+                    <img src="img\antonio.jpg " alt="Logo">
+                   <img src=" img\ariana.webp" alt="Logo">
+                   <img src="img\armaf.avif " alt="Logo">
+                   <img src="img\bahara.jpg " alt="Logo">
+                   <img src=" img\bath.jpg" alt="Logo">
+                   <img src="img\benet.webp " alt="Logo">                      
+                  <img src=" img\bur.jpg" alt="Logo">
+                  <img src=" img\calvin.jpg" alt="Logo">
+                  <img src="img\carolina.jpg " alt="Logo">
+                  <img src=" img\chanel.jpg" alt="Logo">
+                  <img src="img\diesel.jpg " alt="Logo">
+                  <img src=" img\dior.jpg" alt="Logo">
+                  <img src=" img\dolce.jpg" alt="Logo">
+                  <img src=" img\dorsay.jpg" alt="Logo">
+                  <img src=" img\giardini.jpg" alt="Logo">
+                  <img src="img\giorgio.jpg " alt="Logo">
+                  <img src="img\gotas.jpg " alt="Logo">
+                  <img src="img\hugo.jpg " alt="Logo">
+                  <img src=" img\ilil.jpg" alt="Logo">
+                  <img src=" img\jean.jpg" alt="Logo">
+                  <img src="img\lacos.jpg " alt="Logo">
+                  <img src=" img\latafa.jpg" alt="Logo">
+                  <img src="img\louis.jpg " alt="Logo">
+                  <img src=" img\moshino.jpg" alt="Logo">
+                  <img src=" img\paco.svg" alt="Logo">
+                  <img src=" img\paris.jpg" alt="Logo">
+                  <img src="img\sofia.jpg " alt="Logo">
+                  <img src="img\temp.jpg " alt="Logo">
+                  <img src="img\thom.jpg " alt="Logo">
+                  <img src=" img\versace.jpg" alt="Logo">
+                  <img src=" " alt="Logo">
+                  <img src=" " alt="Logo">
+                  <img src=" " alt="Logo">
+                  <img src=" " alt="Logo">   
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="carousel-section" id="referencias">
-            <div class="container">
-                <h2>Nuestras Referencias</h2>
-                <div class="carousel-container">
-                    <div class="carousel-wrapper">
-                        <div class="carousel-item">
-                            <img src="imagen/carolinh.webp" alt="Perfume Carolina Herrera">
-                            <div class="carousel-caption">
-                                <h3>Carolina Herrera</h3>
-                                <p>Una cautivadora mezcla de notas florales y almizcladas.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="imagen/kalvin.jpg" alt="Perfume Calvin Klein">
-                            <div class="carousel-caption">
-                                <h3>Calvin Klein</h3>
-                                <p>Cálido y seductor, perfecto para la noche.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="imagen/lacoste.jpg" alt="Perfume Lacoste">
-                            <div class="carousel-caption">
-                                <h3>Lacoste</h3>
-                                <p>Nítida y limpia, un soplo de aire fresco.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="imagen/sofia.jpg" alt="Perfume Sofia Vergara">
-                            <div class="carousel-caption">
-                                <h3>Sofía Vergara</h3>
-                                <p>Rica y romántica, un clásico floral.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="imagen/carolinh.webp" alt="Perfume Carolina Herrera">
-                            <div class="carousel-caption">
-                                <h3>Carolina Herrera</h3>
-                                <p>Una cautivadora mezcla de notas florales y almizcladas.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="imagen/kalvin.jpg" alt="Perfume Calvin Klein">
-                            <div class="carousel-caption">
-                                <h3>Calvin Klein</h3>
-                                <p>Cálido y seductor, perfecto para la noche.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="imagen/lacoste.jpg" alt="Perfume Lacoste">
-                            <div class="carousel-caption">
-                                <h3>Lacoste</h3>
-                                <p>Nítida y limpia, un soplo de aire fresco.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="imagen/sofia.jpg" alt="Perfume Sofia Vergara">
-                            <div class="carousel-caption">
-                                <h3>Sofía Vergara</h3>
-                                <p>Rica y romántica, un clásico floral.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
+    
 
         <section class="featured-products" id="tamaños">
             <div class="container">
