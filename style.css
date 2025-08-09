@@ -1,769 +1,526 @@
 
- 
-        /* Variables CSS para una gestión de colores más sencilla */
-        :root {
-            --primary-color: #000200; /* negro oscuro para texto principal y elementos clave */
-            --secondary-color: #832ef3; /* Morado para detalles y énfasis */
-            --accent-color: #e6f51d; /* Amarillo/oro para acentos y resaltados */
-            --light-bg: #f8f9fa; /* Fondo claro general */
-            --card-bg: #ffffff; /* Fondo de las tarjetas */
-            --border-color: #e0e0e0; /* Color de borde suave */
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
-            --text-light: #3f3e3e;
-            --button-hover-bg: #e6e6fa; /* Lavanda muy claro para hover de botones */
-            --button-selected-bg: #d8d2db; /* Morado oscuro para botón seleccionado */
-            --nequi-red: #cc0000; /* Rojo Nequi */
-            --nequi-text-color: #333333; /* Color de texto para info Nequi */
-        }
+/* --- Variables y Configuración Global --- */
 
-        body {
-            background-image: url('imagen/karrito.jpg'); /* Asegúrate de que esta ruta sea correcta */
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            background-color: #f8f4d3; /* Color sólido de respaldo */
-            font-family: 'Montserrat', sans-serif; /* Fuente general para todo el body */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
-            box-sizing: border-box;
-        }
-        
-        /* --- Menú Flotante --- */
-        .menu-flotante {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: linear-gradient(135deg, rgba(255, 230, 3, 0.1), rgba(255, 255, 255, 0.05));
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(238, 255, 2, 0.918); /* Corregido: punto y coma faltante */
-            box-shadow: 0 8px 32px 0 var(--shadow-medium);
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 15px 20px;
-            transition: all 0.3s ease-in-out;
-            max-width: calc(100% - 40px); /* Asegura que no se desborde en móviles */
-        }
-
-        .menu-flotante:hover {
-            box-shadow: 0 12px 40px 0 rgba(228, 150, 150, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .menu-flotante ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            width: 100%;
-            justify-content: flex-end;
-            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-        }
-
-        .menu-flotante ul li a {
-            background: rgba(252, 235, 0, 0.15);
-            color: var(--primary-color);
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: 600;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-            box-shadow: 3px 3px 6px var(--shadow-light),
-                        -3px -3px 6px rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease-in-out;
-            white-space: nowrap;
-            display: block; /* Para que el padding y margin funcionen bien */
-        }
-
-        .menu-flotante ul li a:hover {
-            background: rgba(252, 235, 3, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 5px 5px 10px var(--shadow-medium),
-                        -5px -5px 10px rgba(253, 228, 3, 0.15);
-        }
-
-        .menu-flotante ul li a:active {
-            transform: translateY(0);
-            box-shadow: inset 2px 2px 5px rgba(241, 245, 6, 0.2),
-                        inset -2px -2px 5px rgba(224, 169, 15, 0.1);
-            background: rgba(238, 234, 7, 0.1);
-        }
-        /* --- SECCIÓN QUE LLAMA LA ATENCIÓN (ATTENTION GRABBER) --- */
-.attention-grabber {
-    background: linear-gradient(45deg, #FF6B6B, #FFD166, #4ECDC4, #1A535C); /* Degradado multicolor */
-    background-size: 400% 400%; /* Tamaño más grande para la animación */
-    animation: gradientAnimation 15s ease infinite; /* Animación suave del degradado */
-    padding: 80px 20px;
-    text-align: center;
-    color: var(--white);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra pronunciada */
-    position: relative;
-    overflow: hidden; /* Asegura que la animación del fondo no se desborde */
+:root {
+    --color-primary: #000000; /* Púrpura elegante */
+    --color-secondary: #797575; /* Naranja vibrante */
+    --color-tertiary: #0a0301; /* Azul fresco */
+    --color-background-light: #f5f5f5; /* Gris claro suave */
+    --color-background-dark: #2c3e50; /* Azul oscuro */
+    --color-text-dark: #333333; /* Texto oscuro */
+    --color-text-light: #ffffff; /* Texto claro */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
 }
 
-/* Animación del degradado */
+/* --- Estilos Generales del Cuerpo (Body) --- */
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-image:url("imagen/1.jpg");
+    background-repeat: no-repeat;
+    background-position:center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-secondary);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--color-background-dark);
+    font-weight: 700;
+}
+
+/* --- Menú Flotante --- */
+
+.menu-flotante {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: var(--color-background-dark);
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.menu-flotante ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-flotante li a {
+    color: var(--color-text-light);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.menu-flotante li a:hover {
+    color: var(--color-secondary);
+}
+
+/* --- Secciones de Contenido --- */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- Sección que Llama la Atención (Más Viva) --- */
+
 @keyframes gradientAnimation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-.attention-grabber .container {
-    max-width: 800px; /* Limita el ancho del contenido interno */
-    margin: 0 auto;
-    position: relative;
-    z-index: 2; /* Asegura que el contenido esté sobre el fondo animado */
+.attention-grabber {
+    /* Gradiente animado */
+    background: linear-gradient(-45deg, #eeff00, #3ce759, #23a6d5, #d4cfff);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+
+    color: var(--color-text-light);
+    text-align: center;
+    padding: 60px 20px; /* Un poco más de espacio */
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+    border: 3px solid var(--color-secondary); /* Borde vibrante */
+    animation: fadeIn 0.8s ease-in-out;
 }
 
-.attention-icon {
-    font-size: 3.5em; /* Tamaño del icono */
-    color: var(--white);
-    margin-bottom: 20px;
-    opacity: 0.9;
-    /* Efecto de "bounce" sutil para el icono */
-    animation: bounceIcon 2s infinite ease-in-out; 
-}
-
-@keyframes bounceIcon {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+.attention-grabber h1 {
+    font-size: 3rem; /* Título más grande */
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para que resalte */
 }
 
 .attention-grabber h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.2em; /* Título grande y llamativo */
-    margin-bottom: 15px;
-    line-height: 1.2;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); /* Sombra para el texto del título */
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-style: italic; /* Texto más dinámico */
 }
 
-.attention-grabber p {
-    font-size: 1.3em;
-    margin-bottom: 35px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    opacity: 0.9;
+.attention-icon {
+    font-size: 4rem; /* Icono más grande */
+    margin-bottom: 25px;
+color: #ffc506; / Ejemplo de color naranja en hexadecimal /
+    animation: bounce 2s infinite; /* Animación de rebote */
+    
 }
 
-/* Estilos específicos para el botón de esta sección */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+}
+
+/* --- Botón con Efecto Cautivador --- */
+
 .btn-attention {
-    background-color: var(--secondary-color); /* Dorado para el botón principal */
-    color: var(--primary-color); /* Texto negro para contraste */
-    padding: 18px 40px; /* Más padding para un botón más grande */
-    font-size: 1.4em; /* Texto más grande en el botón */
-    border-radius: 8px; /* Bordes más redondeados */
+    background-color: transparent; /* Fondo transparente para el botón */
+    color: var(--color-text-light);
+    padding: 15px 30px;
+    border-radius: 50px;
     font-weight: 700;
-    letter-spacing: 0.5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.2rem;
+    display: inline-block;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid var(--color-text-light);
+    box-shadow: 0 0 15px var(--color-text-light); /* Brillo inicial */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.btn-attention::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    transition: width 0.6s ease, height 0.6s ease;
+    transform: translate(-50%, -50%);
+    opacity: 0;
 }
 
 .btn-attention:hover {
-    background-color: #e6c247; /* Un dorado un poco más claro al pasar el mouse */
-    transform: translateY(-5px) scale(1.02); /* Efecto de "pop" y levantamiento */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+    box-shadow: 0 0 25px var(--color-secondary); /* Brillo al pasar el mouse */
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
 }
 
-/* Responsive adjustments for this section */
+.btn-attention:hover::before {
+    width: 200px;
+    height: 200px;
+    opacity: 1;
+}
+
+.btn-attention:hover {
+    transform: scale(1.05);
+    background-color: #e67e22; /* Tono más oscuro al pasar el cursor */
+}
+
+/* --- Sección de Géneros --- */
+
+.section-genero {
+    text-align: center;
+    margin: 40px 0;
+    background-color: var(--color-background-light);
+    padding: 30px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.section-genero h2 {
+    color: var(--color-primary);
+}
+
+.section-genero h3 {
+    color: var(--color-background-dark);
+    margin-top: 5px;
+}
+
+.choice-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    margin: 10px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    background-color: #e0e0e0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.choice-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.choice-button img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.gender-dama { background-color: #df5f89; }
+.gender-caballero { background-color: #c8d8e4; }
+.gender-unisex { background-color: #f1f8e9; }
+
+/* --- Secciones de Formulario y Pedido --- */
+
+.order-section {
+    display: grid;
+    gap: 30px;
+}
+
+.section-card {
+    background-color:rgba(170, 224, 245, 0.651);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border-left: 5px solid var(--color-primary);
+}
+
+.section-card h2 {
+    color: var(--color-primary);
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input[type="text"],
+input[type="tel"],
+.styled-select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+.styled-select:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 8px rgba(142, 68, 173, 0.3);
+}
+
+.styled-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%238e44ad" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    cursor: pointer;
+}
+
+.divider {
+    text-align: center;
+    position: relative;
+    margin: 20px 0;
+}
+
+.divider h3 {
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+    background-color: var(--color-text-light);
+    z-index: 1;
+    color: var(--color-tertiary);
+    font-size: 1.2rem;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.size-options, .payment-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.size-options .choice-button,
+.payment-options .choice-button {
+    background-color: #f0f0f0;
+    border: 2px solid transparent;
+    padding: 12px 25px;
+    cursor: pointer;
+}
+
+.choice-button.active {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border-color: var(--color-primary);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(142, 68, 173, 0.4);
+}
+
+.payment-options .choice-button img,
+.payment-options .choice-button i {
+    margin-right: 8px;
+}
+
+.payment-nequi { background-color: #f1f8e9; }
+.payment-cash { background-color: #e3f2fd; }
+.payment-credit { background-color: #fce4ec; }
+
+.nequi-info, .credit-info {
+    background-color: #fff3e0;
+    border-left: 4px solid var(--color-secondary);
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: var(--border-radius);
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    max-height: 200px;
+    opacity: 1;
+}
+
+.nequi-info.hidden, .credit-info.hidden {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 15px;
+    opacity: 0;
+}
+
+/* --- Resumen y Botón de WhatsApp --- */
+
+.summary-card {
+    background-color: #f0f4f8;
+    text-align: center;
+}
+
+.summary-title {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.message-area {
+    background-color: var(--color-text-light);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: left;
+    white-space: pre-wrap; /* Para que los saltos de línea funcionen */
+}
+
+.whatsapp-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #25d366; /* Color de WhatsApp */
+    color: var(--color-text-light);
+    border: none;
+    padding: 15px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.whatsapp-button:hover {
+    background-color: #128c7e;
+    transform: scale(1.02);
+}
+
+.whatsapp-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.final-note {
+    font-style: italic;
+    color: #999;
+    margin-top: 20px;
+}
+
+/* --- Animaciones --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Responsive Design --- */
 @media (max-width: 768px) {
-    .attention-grabber {
-        padding: 60px 15px;
+    .order-section {
+        grid-template-columns: 1fr;
     }
+
+    .attention-grabber h1 {
+        font-size: 2rem;
+    }
+
     .attention-grabber h2 {
-        font-size: 2.5em;
-    }
-    .attention-grabber p {
-        font-size: 1.1em;
-    }
-    .attention-icon {
-        font-size: 2.8em;
-    }
-    .btn-attention {
-        padding: 15px 30px;
-        font-size: 1.2em;
+        font-size: 1.2rem;
     }
 }
-
-@media (max-width: 480px) {
-    .attention-grabber {
-        padding: 40px 10px;
-    }
-    .attention-grabber h2 {
-        font-size: 2em;
-    }
-    .attention-grabber p {
-        font-size: 1em;
-    }
-    .attention-icon {
-        font-size: 2.2em;
-        margin-bottom: 15px;
-    }
-    .btn-attention {
-        padding: 12px 25px;
-        font-size: 1em;
-    }
+/* Contenedor de las opciones de tamaño */
+.size-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
-        /* --- Contenido Principal --- */
-        .main-content-wrapper {
-            width: 90%;
-            max-width: 900px;
-            margin-top: 120px; /* Espacio para el menú flotante */
-            padding: 20px;
-            box-sizing: border-box;
-            opacity: 0; /* Inicialmente oculto para la animación */
-            transform: translateY(20px); /* Para el efecto de entrada */
-            animation: fadeInSlideUp 0.8s ease-out forwards;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-grow: 1; /* Permite que crezca para ocupar el espacio disponible */
-        }
-
-        @keyframes fadeInSlideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--primary-color);
-        }
-
-        .page-header h2 {
-            font-family: 'Montserrat', sans-serif; /* Cambiado a Montserrat para este h2 */
-            font-size: 1.5em;
-            color: var(--text-light);
-            margin-bottom: 5px;
-        }
-
-        .page-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.2em;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .page-subtitle {
-            font-size: 1.2em;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .order-section {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            width: 100%; /* Asegura que la sección ocupe el ancho completo del wrapper */
-        }
-
-        .section-card {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px var(--shadow-light);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .section-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px var(--shadow-medium);
-        }
-
-        .section-card h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2em;
-            color: var(--secondary-color);
-            margin-top: 0;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            display: inline-block; /* Para que el borde sea solo del texto */
-        }
-
-        .section-card p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-        
-        .section-genero {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px var(--shadow-light);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .section-genero:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px var(--shadow-medium);
-        }
-
-        .section-genero h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2em;
-            color: var(--secondary-color);
-            margin-top: 0;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        .section-genero h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1em;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-
-        /* --- Grupos de Input y Select --- */
-        .input-group, .options-group, .search-and-select-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        input[type="text"],
-        input[type="tel"],
-        select {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 1em;
-            color: var(--primary-color);
-            background-color: var(--light-bg);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            box-sizing: border-box; /* Incluye padding y borde en el ancho total */
-        }
-
-        input[type="text"]:focus,
-        input[type="tel"]:focus,
-        select:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(243, 227, 6, 0.2); /* Sombra de enfoque sutil */
-            outline: none;
-        }
-
-        /* --- Divisor "O" --- */
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--text-light);
-            margin: 30px 0;
-            font-weight: 600;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .divider:not(:empty)::before {
-            margin-right: .5em;
-        }
-
-        .divider:not(:empty)::after {
-            margin-left: .5em;
-        }
-
-        /* --- Botones de Selección (Tamaño, Pago, Género) --- */
-        .size-options, .payment-options, .gender-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Auto-ajustable con mínimo */
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .choice-button {
-            background-color: var(--light-bg); /* Fondo claro para los botones */
-            border: 1px solid var(--border-color);
-            color: var(--primary-color);
-            padding: 15px 20px;
-            border-radius: 10px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            box-shadow: 0 2px 5px rgba(241, 241, 237, 0.979);
-            text-decoration: none; /* Asegura que no haya subrayado en enlaces si se usa `a` */
-        }
-
-        .choice-button img {
-            margin-right: 8px; /* Espacio entre el icono y el texto */
-            width: 30px; /* Tamaño del icono */
-            height: 30px; /* Tamaño del icono */
-        }
-
-        .choice-button:hover {
-            background-color: var(--button-hover-bg);
-            border-color: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px var(--shadow-light);
-        }
-
-        .choice-button.selected {
-            background-color: var(--secondary-color); /* Morado vibrante al seleccionar */
-            color: white;
-            border-color: var(--button-selected-bg);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--shadow-medium);
-        }
-
-        .choice-button.selected img {
-            filter: brightness(0) invert(1); /* Hace el icono blanco al seleccionar */
-        }
-
-
-        /* --- Estilos específicos para el botón Nequi --- */
-        .payment-nequi {
-            justify-content: center; /* Centra el contenido del botón */
-        }
-
-        .payment-nequi img {
-            width: auto; /* Permite que el ancho se ajuste según la proporción */
-            max-width: 40px; /* Ancho máximo para el logo */
-            height: auto; /* Mantiene la proporción de la imagen */
-            max-height: 40px; /* Altura máxima para el logo */
-            margin-right: 10px; /* Espacio entre el logo y el texto */
-            vertical-align: middle; /* Alinea verticalmente con el texto */
-        }
-
-        /* --- Estilos para el icono de Efectivo --- */
-        .payment-cash i {
-            font-size: 1.4em;
-            margin-right: 8px;
-            color: var(--primary-color); /* Color por defecto */
-        }
-
-        .payment-cash.selected i {
-            color: white; /* Color blanco cuando está seleccionado */
-        }
-
-        /* --- Información de Nequi oculta --- */
-        .nequi-info {
-            background-color: #90d9f7; /* Fondo naranja claro */
-            border: 1px solid #d5df7c;
-            border-radius: 10px;
-            padding: 15px 20px;
-            margin-top: 20px;
-            color: var(--nequi-text-color);
-            font-size: 0.95em;
-            line-height: 1.5;
-            transition: all 0.4s ease-in-out;
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-        }
-
-        .nequi-info.hidden {
-            opacity: 0;
-            max-height: 0;
-            padding: 0 20px; /* Para que el padding no cause un "salto" */
-            margin-top: 0;
-        }
-
-        .nequi-info.active {
-            opacity: 1;
-            max-height: 100px; /* Suficientemente grande para el contenido */
-            padding: 15px 20px;
-            margin-top: 20px;
-        }
-
-        .nequi-info strong {
-            color: var(--nequi-red); /* Rojo Nequi para el número */
-            font-weight: 700;
-        }
-
-        /* --- Resumen del Pedido --- */
-        .summary-card {
-            color: rgb(3, 3, 3);
-            padding: 35px;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(8, 8, 8, 0.25);
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .summary-title {
-            color: rgb(8, 8, 8);
-            border-bottom-color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        .summary-card p {
-            color: rgba(10, 10, 10, 0.9);
-            margin-bottom: 10px;
-        }
-
-        .message-area {
-            background-color: rgba(234, 238, 234, 0.904); /* Corregido: Eliminar un "5)" extra */
-            border-radius: 10px;
-            padding: 20px;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: black; /* Corregido: punto y coma faltante */
-            font-style: italic;
-            margin-bottom: 25px;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* --- Botón de WhatsApp --- */
-        .whatsapp-button {
-            background-color: #25d366; /* Verde WhatsApp */
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 25px auto 15px auto; /* Centrado y con margen */
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            width: fit-content; /* Se ajusta al contenido */
-            text-decoration: none; /* Importante para el enlace */
-        }
-
-        .whatsapp-button:hover {
-            background-color: #1da851; /* Verde más oscuro al pasar el ratón */
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .whatsapp-button:active {
-            transform: translateY(0);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .whatsapp-icon {
-            width: 28px;
-            height: 28px;
-            filter: brightness(0) invert(1); /* Icono blanco */
-        }
-
-        .final-note {
-            font-size: 0.9em;
-            color: rgba(0, 0, 0, 0.8); /* Cambiado a negro para mejor contraste en fondos claros */
-            font-style: italic;
-            margin-top: 15px;
-        }
-
-        /* --- Búsqueda de Perfumes --- */
-        .search-results-perfume {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            max-height: 200px;
-            overflow-y: auto;
-            margin-top: 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            list-style: none;
-            padding: 0;
-        }
-
-        .search-results-perfume div { /* Cambiado de 'li' a 'div' ya que no es una lista real */
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            color: var(--primary-color);
-        }
-
-        .search-results-perfume div:hover {
-            background-color: var(--button-hover-bg);
-        }
-
-        .search-results-perfume div.selected-result {
-            background-color: var(--secondary-color);
-            color: white;
-            font-weight: 600;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* --- Media Queries para Responsividad --- */
-        @media (max-width: 768px) {
-            .menu-flotante {
-                top: 15px;
-                right: 15px;
-                padding: 10px 15px;
-                border-radius: 10px;
-            }
-            .menu-flotante ul {
-                gap: 10px;
-            }
-            .menu-flotante ul li a {
-                padding: 8px 12px;
-                font-size: 0.9em;
-            }
-
-            .main-content-wrapper {
-                margin-top: 100px;
-                padding: 15px;
-            }
-
-            .page-title {
-                font-size: 2.5em;
-            }
-
-            .page-subtitle {
-                font-size: 1.1em;
-            }
-
-            .section-card, .section-genero {
-                padding: 25px;
-            }
-
-            .section-card h2, .section-genero h2 {
-                font-size: 1.8em;
-            }
-
-            .input-group, .options-group, .search-and-select-group {
-                gap: 10px;
-            }
-
-            input[type="text"], input[type="tel"], select {
-                padding: 12px;
-                font-size: 0.95em;
-            }
-
-            .choice-button {
-                padding: 12px 18px;
-                font-size: 1em;
-            }
-
-            .payment-nequi img {
-                max-width: 35px;
-                max-height: 35px;
-            }
-
-            .whatsapp-button {
-                padding: 12px 25px;
-                font-size: 1.1em;
-            }
-
-            .whatsapp-icon {
-                width: 24px;
-                height: 24px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .menu-flotante {
-                top: 10px;
-                right: 10px;
-                padding: 8px 10px;
-                border-radius: 8px;
-                width: auto;
-                left: auto;
-                transform: none;
-            }
-            .menu-flotante ul {
-                flex-wrap: wrap;
-                justify-content: flex-end;
-                gap: 8px;
-            }
-            .menu-flotante ul li a {
-                padding: 6px 10px;
-                font-size: 0.8em;
-            }
-
-            .main-content-wrapper {
-                margin-top: 80px;
-                padding: 10px;
-            }
-
-            .page-title {
-                font-size: 2em;
-            }
-
-            .page-subtitle {
-                font-size: 0.95em;
-            }
-
-            .section-card, .section-genero {
-                padding: 20px;
-            }
-
-            .section-card h2, .section-genero h2 {
-                font-size: 1.5em;
-            }
-
-            input[type="text"], input[type="tel"], select {
-                padding: 10px;
-                font-size: 0.9em;
-            }
-
-            .size-options, .payment-options, .gender-options {
-                grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
-            }
-
-            .choice-button {
-                padding: 10px 15px;
-                font-size: 0.9em;
-            }
-
-            .payment-nequi img {
-                max-width: 30px;
-                max-height: 30px;
-            }
-
-            .nequi-info {
-                font-size: 0.85em;
-                padding: 10px 15px;
-            }
-
-            .whatsapp-button {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-
-            .whatsapp-icon {
-                width: 20px;
-                height: 20px;
-            }
-        }
-        a {
-    text-decoration: none;
-}
-
+/* Estilo Base del Botón (Neumorfismo) */
+.choice-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-background-dark);
+    background-color: var(--color-background-light);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border: none;
     
+    /* Sombra para el efecto de Neumorfismo */
+    box-shadow: 6px 6px 12px #d9d9d9, 
+                -6px -6px 12px #ffffff;
+}
+
+/* Estilo para los iconos dentro del botón */
+.choice-button i {
+    margin-right: 8px;
+    color: var(--color-primary);
+}
+
+/* Efecto al pasar el mouse */
+.choice-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 8px #d9d9d9, 
+                -4px -4px 8px #ffffff;
+}
+
+/* Estilo del botón al ser seleccionado (presionado) */
+.choice-button.active {
+    color: var(--color-text-light);
+    background-color: var(--color-primary);
+    
+    /* Sombra invertida para dar la sensación de que está "presionado" */
+    box-shadow: inset 4px 4px 8px #7a3a91, 
+                inset -4px -4px 8px #a24edc;
+}
+
+/* Color del ícono y texto cuando el botón está activo */
+.choice-button.active i {
+    color: var(--color-text-light);
+}
+
+.choice-button.active {
+    color: var(--color-text-light);
+}
