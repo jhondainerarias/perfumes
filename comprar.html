@@ -25,21 +25,25 @@
       <main>
 <section class="attention-grabber">
     <div class="container">
-        <i class="fas fa-bullhorn attention-icon"></i>
+<i class="fas fa-dollar-sign attention-icon"></i>
+<i class="fas fa-shopping-cart attention-icon"></i>
+<i class="fas fa-dollar-sign attention-icon"></i>
+<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+
         <h2>BIENVENIDO A LA PAGINA DE COMPRAS </h3>
         <h1>todo esta listo para ti  </h1>
-       <a class="btn btn-attention" id="botonConfeti">
-    desde 20 mil pesos
-</a>
+       <a class="btn btn-attention" id="botonConfeti" onclick="lanzarEfecto()">  desde 20 mil pesos</a>
     </div>
 </section>
-<div class="section-genero">
+<section class="order-section">
+            <div class="section-card">
     <h2>no sabes de perfumes ?</h2>
     <h3>Así están categorizados nuestros perfumes:</h3>
     <p>al hacer clik sobre estas opciones te llevara a una lista de perfumes  para cada genero   </p>
   <a href="dama.html">
     <div class="choice-button gender-dama">
-        <img src="imagen/icono.png" alt="Icono Dama" width="50" height="50"> Dama
+        <img src="imagen/made.jpg" alt="Icono Dama" width="50" height="50"> Dama
     </div>
 </a>
 <a href="caballero.html">
@@ -90,10 +94,14 @@
                 <h2> Elige el Tamaño y Precio</h2>
                 <p>Selecciona la presentación que prefieras para tu fragancia.</p>
                 <div class="size-options" id="tamañoMenu">
-                    <button class="choice-button" data-tamaño="pequeño" data-precio="20000">pequeño ($20.000)</button>
-                    <button class="choice-button" data-tamaño="mediano" data-precio="40000">mediano ($40.000)</button>
-                    <button class="choice-button" data-tamaño="grande" data-precio="75000">grande ($70.000)</button>
-                </div>
+                     <button class="choice-button size-small" data-tamaño="pequeño" data-precio="20000">
+         pequeño ($20.000)
+    </button>
+    <button class="choice-button size-medium" data-tamaño="mediano" data-precio="40000">
+         mediano ($40.000)
+    </button>
+    <button class="choice-button size-large" data-tamaño="grande" data-precio="75000">
+       grande ($70.000)  </div>
             </div>
 
 <div class="section-card">
@@ -136,3 +144,4 @@
     <script src="comprar.js"></script>
 </body>
 </html>
+
