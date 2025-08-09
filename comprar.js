@@ -369,3 +369,25 @@ document.addEventListener('DOMContentLoaded', function() {
     populateCasaSelect();
     updateOrderSummary();
 });
+function lanzarEfecto() {
+    // Definimos las imágenes para el confeti
+    const images = ['imagen/billete.png', 'imagen/moneda-oro.png']; // Asegúrate de que las rutas de las imágenes son correctas
+
+    // Obtenemos la posición del botón
+    const button = document.getElementById('botonConfeti');
+    const rect = button.getBoundingClientRect();
+
+    // Lanzamos el confeti desde la posición del botón
+    confetti({
+        particleCount: 150, // Más partículas para un efecto más denso
+        spread: 120, // Ampliamos la dispersión
+        origin: {
+            x: (rect.left + rect.right) / window.innerWidth / 2,
+            y: rect.top / window.innerHeight
+        },
+        // Usamos las imágenes como confeti
+        shapes: images.map(img => `<img src="${img}" style="width: 50px; height: 50px;">`),
+        scalar: 2, // Aumentamos el tamaño de las partículas
+        ticks: 200 // Duración del efecto
+    });
+}
