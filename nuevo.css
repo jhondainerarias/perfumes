@@ -102,7 +102,7 @@ h1, h2, h3 {
 
 .attention-grabber {
     /* Gradiente animado */
-    background: linear-gradient(-45deg, #eeff00, #3ce759, #23a6d5, #d4cfff);
+    background: linear-gradient(-45deg, #f8f8f8, #3ce759, #55d523, #4234c0);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
 
@@ -523,3 +523,32 @@ input[type="tel"]:focus,
 .choice-button.active {
     color: var(--color-text-light);
 }
+
+     /* --- PIE DE PÁGINA (FOOTER) --- */
+        footer {
+            background-color:rgba(162, 245, 245, 0.473); /* Fondo negro */
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        footer .social-links {
+            margin-top: 15px;
+        }
+
+        footer .social-links a {
+            color: var(--white); /* Iconos blancos */
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--secondary-color); /* Se vuelven dorados al pasar el mouse */
+        }
