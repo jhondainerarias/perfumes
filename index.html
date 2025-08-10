@@ -52,81 +52,108 @@ body {
     transform: translateY(-2px);
 }
 
-/* --- ESTILOS PARA EL HEADER (Menú de Navegación) --- */
-header {
-    background-color: rgba(20, 20, 20, 0.95);
-    width: 100%;
-    padding: 15px 0;
-    box-shadow: 0 4px 15px rgba(255, 230, 3, 0.2);
-    z-index: 1000;
-    position: sticky;
-    top: 0;
-    transition: background-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
-}
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-header:hover {
-    background-color: rgb(42, 42, 43);
-    box-shadow: 0 6px 20px rgba(122, 155, 45, 0.3);
-}
+        /* --- ESTILOS DEL MENÚ FLOTANTE (COPIADOS DE TU CÓDIGO) --- */
+        .menu-flotante {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            left: auto;
+            transform: none;
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 15px 20px;
+            transition: all 0.3s ease-in-out;
+        }
 
-header .container > a {
-    color: var(--secondary-color);
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
-    font-weight: bold;
-    text-decoration: none;
-    letter-spacing: 1px;
-    white-space: nowrap;
-}
+        .menu-flotante:hover {
+            transform: none;
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
 
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
+        .menu-flotante ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            width: 100%;
+            justify-content: flex-end;
+        }
 
-nav ul li {
-    margin-left: 30px;
-}
+        .menu-flotante ul li {
+            list-style: none;
+        }
 
-nav ul li a {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 1.1em;
-    font-weight: 500;
-    padding: 5px 0;
-    position: relative;
-    transition: color 0.3s ease;
-}
+        .menu-flotante ul li a {
+            background: rgba(255, 255, 255, 0.1);
+            color: #00000c;
+            text-decoration: none;
+            padding: 6px 8px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+                        -5px -5px 10px rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease-in-out;
+            white-space: nowrap;
+        }
 
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    display: block;
-    margin-top: 5px;
-    right: 0;
-    background: var(--secondary-color);
-    transition: width 0.3s ease;
-}
+        .menu-flotante ul li a:hover {
+            background: rgba(21, 135, 241, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.3),
+                        -7px -7px 14px rgba(255, 255, 255, 0.1);
+        }
 
-nav ul li a:hover::after {
-    width: 100%;
-    left: 0;
-    background: var(--secondary-color);
-}
+        .menu-flotante ul li a:active {
+            transform: translateY(0);
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3),
+                        inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-nav ul li a:hover {
-    color: var(--secondary-color);
-}
+
+ /* --- Adaptabilidad (Responsive Design) del Menú --- */
+        @media (max-width: 768px) {
+            .menu-flotante {
+                top: 15px;
+                right: 15px;
+                padding: 10px 15px;
+                border-radius: 10px;
+            }
+            .menu-flotante ul {
+                gap: 10px;
+            }
+            .menu-flotante ul li a {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+            h1 {
+                font-size: 2.8em;
+                padding-top: 60px;
+            }
+            h2 {
+                font-size: 2em;
+            }
+        }
+
+
+
 
 /* --- SECCIÓN HERO (Banner Principal) --- */
 .hero {
@@ -364,7 +391,7 @@ nav ul li a:hover {
 
 .product-card img {
     width: 100%;
-    height: 250px;
+    height: 50%;
     object-fit: cover;
     display: block;
 }
@@ -399,7 +426,7 @@ nav ul li a:hover {
     width: 100%;
     text-align: center;
     display: block;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 /* --- SECCIÓN MARQUEE (Marcas) --- */
@@ -622,30 +649,67 @@ footer .social-links a:hover {
         font-size: 1em;
     }
 }
+ /* --- Adaptabilidad (Responsive Design) del Menú --- */
+        @media (max-width: 768px) {
+            .menu-flotante {
+                top: 15px;
+                right: 15px;
+                padding: 10px 15px;
+                border-radius: 10px;
+            }
+            .menu-flotante ul {
+                gap: 10px;
+            }
+            .menu-flotante ul li a {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+            h1 {
+                font-size: 2.8em;
+                padding-top: 60px;
+            }
+            h2 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-flotante {
+                top: 10px;
+                right: 10px;
+                padding: 8px 10px;
+                border-radius: 8px;
+                width: auto;
+                left: auto;
+                transform: none;
+            }
+            .menu-flotante ul {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                gap: 8px;
+            }
+            .menu-flotante ul li a {
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
 </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <a href="index.html">Mis Fragancias <br> jhon dainer arias </a> 
-            <nav>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="#referencias">Referencias</a></li>
-                    <li><a href="#tamaños">Tamaños</a></li>
-                    <li><a href="caballero.html">Caballero</a></li>
-                    <li><a href="dama.html">Dama</a></li>
-                    <li><a href="comprar.html">Hacer una compra</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <nav class="menu-flotante">
+        <ul>
+            <li><a href="dama.html">Dama</a></li>
+            <li><a href="caballero.html">Caballero</a></li>
+            <li><a href="unisex.html">Unisex</a></li> <ul>
+            <li><a href="comprar.html">jhon dainer arias </a></li>
+         </ul>
+    </nav>
+
 
     <main>
 <section class="attention-grabber">
-    <div class="container">
-        <i class="fas fa-bullhorn attention-icon"></i>
+    <div class="container"><br>
+    
         <h2>¡Oferta Exclusiva por Tiempo Limitado!</h3>
       <h3>preparamos fragancias, en singles genericos, de bajo costo para mayor economia, la fragancia, el envase, y el tamaño que elijas  </h2>
         <p>No dejes pasar la oportunidad de adquirir tus fragancias favoritas con un descuento increíble. ¡Stock limitado!</p>
@@ -794,4 +858,6 @@ footer .social-links a:hover {
 
 </body>
 </html>
+
+
 
