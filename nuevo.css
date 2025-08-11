@@ -58,8 +58,8 @@ h1, h2, h3 {
 
 .menu-flotante {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
     z-index: 1000;
     background-color: var(--color-background-dark);
     padding: 10px 20px;
@@ -76,7 +76,7 @@ h1, h2, h3 {
 
 .menu-flotante li a {
     color: var(--color-text-light);
-    font-weight: 600;
+    font-weight: 200;
     font-size: 1.1rem;
 }
 
@@ -102,7 +102,7 @@ h1, h2, h3 {
 
 .attention-grabber {
     /* Gradiente animado */
-    background: linear-gradient(-45deg, #f8f8f8, #3ce759, #55d523, #4234c0);
+    background: linear-gradient(-45deg, #1e2927, #8ae8f8, #f1faee, #ffe600);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
 
@@ -131,7 +131,7 @@ h1, h2, h3 {
 .attention-icon {
     font-size: 4rem; /* Icono más grande */
     margin-bottom: 25px;
-color: #ffc506; / Ejemplo de color naranja en hexadecimal /
+color: #000000; / Ejemplo de color naranja en hexadecimal /
     animation: bounce 2s infinite; /* Animación de rebote */
     
 }
@@ -146,7 +146,7 @@ color: #ffc506; / Ejemplo de color naranja en hexadecimal /
 
 .btn-attention {
     background-color: transparent; /* Fondo transparente para el botón */
-    color: var(--color-text-light);
+    color:black;
     padding: 15px 30px;
     border-radius: 50px;
     font-weight: 700;
