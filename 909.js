@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (nombrePerfume && marcaPerfume) {
                 // Muestra un alert con el mensaje de selección
-                alert(`Has seleccionado el perfume "${nombrePerfume}" de la marca ${marcaPerfume}.`);
+                alert(`selecciono el perfume "${nombrePerfume}" de la marca ${marcaPerfume}.ten encuenta esta info para tu pedido`);
             }
         });
     });
+
 
 });
