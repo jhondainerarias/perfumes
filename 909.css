@@ -1,0 +1,285 @@
+/* Importa la fuente Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* ==================================================================================
+   ESTILOS GENERALES
+   ================================================================================== */
+
+/* Paleta de colores y tipografía */
+:root {
+    --bg-color-dark: #e7e5d5;
+    --text-color-light: #e0e0e0;
+    --primary-accent: #007bff; /* Azul vibrante */
+    --secondary-accent: #ff6347; /* Rojo coral */
+    --card-bg: #1e1e1e;
+    --border-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Estilos de la página completa */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color-dark); /* Color del texto por defecto */
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ==================================================================================
+   ANIMACIONES
+   ================================================================================== */
+
+/* Animación de cambio de color del fondo, ideal para el body */
+@keyframes color-change {
+    0% { background-color: #d4faf82a; } /* Rojo pastel */
+    25% { background-color: #b9d2fa36; } /* Azul pastel */
+    50% { background-color: #cefcdf42; } /* Verde pastel */
+    75% { background-color: #a5d1bd57; } /* Naranja pastel */
+    100% { background-color: #f7dede44; } /* Vuelve al rojo pastel */
+}
+
+/* Aplica la animación al body */
+.attention-grabber {
+    animation: color-change 15s infinite; /* Transición suave y lenta */
+}
+
+/* Estilos del encabezado */
+.header-bg {
+    background: #1f2937; /* Color de fondo inicial */
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: #f3f4f6;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); /* Sombra suave para un efecto 3D */
+    border-radius: 0 0 20px 20px; /* Bordes redondeados en la parte inferior */
+}
+
+.header-title {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.header-owner {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    color: #e5e7eb;
+}
+
+/* Estilos del cuerpo del catálogo */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+    font-size: 1.125rem;
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 2rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    color: var(--text-color-light);
+    background-color: var(--bg-color-dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2, h3, h4 {
+    color: var(--text-color-light);
+}
+
+h2 {
+    font-size: 2.8rem;
+    color: var(--primary-accent);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #a0a0a0;
+    margin-bottom: 40px;
+}
+
+/* ==================================================================================
+   ESTILOS DE LAS TARJETAS DE PRODUCTO
+   ================================================================================== */
+
+.featured-products {
+    padding: 80px 0;
+}
+
+.product-grid {
+    display: grid;
+    /* La clave del diseño responsivo: ajusta el número de columnas automáticamente */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid var(--border-color);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.product-card img {
+    width: 100%;
+    /* Altura fija para todas las imágenes */
+    height: 250px;
+    object-fit: cover; /* Asegura que la imagen no se distorsione */
+    border-bottom: 1px solid var(--border-color);
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.product-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--text-color-light);
+}
+
+.product-info h3 {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+.product-info p {
+    font-size: 0.85rem;
+    color: #999;
+    margin: 10px 0 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--primary-accent);
+    color: #fff;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+    color: #0f0f0f; /* Color del destello neón */
+    transform: translateX(10px) scale(1.03); /* Desplazamiento y un ligero agrandamiento */
+    background-color: #77a5fa; /* Cambio de fondo en hover */
+    /* El efecto de resplandor */
+    box-shadow: 0 0 15px #03fc24, /* El resplandor principal */
+                 0 0 25px #f5f8d7; /* Un segundo resplandor para intensificar el efecto */
+}
+
+/* Estilos para el contenedor de la tarjeta del producto */
+.product-card {
+    background-color: #f7ecec05; /* Fondo oscuro */
+    /* Añade estilos para la tarjeta si lo necesitas, como padding o box-shadow */
+}
+
+/* ------------------------------------------- */
+
+/* Estilos de la lista de perfumes */
+.perfume-list {
+    list-style: none; /* Elimina los puntos de la lista */
+    padding: 0;
+    margin: 15px 0 0 0;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #effaf7; /* Fondo oscuro */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(255, 166, 0, 0.5); /* Sombra más pronunciada */
+    padding: 10px;
+}
+
+/* Estilos para cada perfume en la lista */
+.perfume-list li {
+    position: relative;
+    padding: 10px 15px;
+    border-bottom: 1px solid #f0e8e8; /* Separador sutil */
+    font-size: 1em;
+    font-weight: 300;
+    color: #080808; /* Color de texto blanco por defecto */
+    cursor: pointer;
+    transition: all 0.4s ease-in-out; /* Transición más larga y suave */
+}
+
+.perfume-list li:last-child {
+    border-bottom: none; /* No hay separador en el último elemento */
+}
+
+/* ------------------------------------------- */
+
+/* Efecto espectacular al pasar el cursor */
+.perfume-list li:hover {
+    color: #0f0f0f; /* Color del destello neón */
+    transform: translateX(10px) scale(1.03); /* Desplazamiento y un ligero agrandamiento */
+    background-color: #77a5fa; /* Cambio de fondo en hover */
+    /* El efecto de resplandor */
+    box-shadow: 0 0 15px #fcce03, /* El resplandor principal */
+                 0 0 25px #f5f8d7; /* Un segundo resplandor para intensificar el efecto */
+}
+
+/* El estilo del mensaje de selección es el que habíamos discutido anteriormente */
+#mensaje-seleccion {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 1.2em;
+    color: #1f2937;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.5s ease-in-out;
+}
