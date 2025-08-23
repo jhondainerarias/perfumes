@@ -1,0 +1,213 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    /* Añade el linear-gradient antes de la URL de la imagen */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/001.jpg');
+    background-size: cover; /* Para que la imagen cubra toda la pantalla */
+    background-position: center; /* Para centrar la imagen */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.menu-flotante-transparente {
+    /* Posicionamiento y visibilidad */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    
+    /* Apariencia y transparencia */
+    background-color: transparent;
+    color: rgb(200, 240, 250); /* Color del texto para que sea visible */
+    border: 2px solid rgb(247, 242, 201); /* Borde para definir la forma del botón */
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease; /* Efecto de transición suave */
+}
+
+/* Efecto al pasar el cursor sobre el botón */
+.menu-flotante-transparente:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Color semi-transparente blanco */
+    color: white;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.purchase-panel {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0d2;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.panel-title {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.step {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.hidden {
+    display: none;
+}
+
+.label-input, .label-select {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"], input[type="tel"], select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.next-btn, .back-btn, #send-order-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.next-btn, #send-order-btn {
+    background-color: #25d366;
+    color: white;
+}
+
+.next-btn:hover, #send-order-btn:hover {
+    background-color: #128c7e;
+}
+
+.back-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.back-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.brand-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.brand-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.brand-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.brand-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.brand-item.selected {
+    border-color: #25d366;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.step-subtitle {
+    font-size: 1.5em;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.dynamic-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.dynamic-list li {
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.dynamic-list li:hover {
+    background-color: #f9f9f9;
+}
+
+.dynamic-list li.selected {
+    background-color: #e0f2f1;
+    border-color: #25d366;
+    font-weight: bold;
+}
+
+.order-summary {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+    border: 1px solid #eee;
+}
+
+.order-summary p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.order-summary span {
+    font-weight: bold;
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
