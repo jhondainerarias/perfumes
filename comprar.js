@@ -426,3 +426,4 @@ function lanzarEfecto() {
         ticks: 200 
     });
 }
+
