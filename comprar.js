@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const messageArea = document.getElementById('messageArea');
     const nombreInput = document.getElementById('nombreInput');
     const celularInput = document.getElementById('celularInput');
-    const containerPerfumeByBrand = document.getElementById('perfumeByBrandContainer');
+    // const containerPerfumeByBrand = document.getElementById('perfumeByBrandContainer'); // No se usa directamente en JS
     const casaSelect = document.getElementById('casaSelect');
     const perfumeSelect = document.getElementById('perfumeSelect');
     const perfumeGlobalSelect = document.getElementById('perfumeGlobalSelect');
@@ -140,15 +140,25 @@ document.addEventListener('DOMContentLoaded', function() {
             minimumFractionDigits: 0
         }).format(price);
     }
+
+    // Función para formatear el nombre de la marca (ej: 'carolinaherrera' -> 'Carolina Herrera')
+    function formatBrandName(brandKey) {
+        return brandKey
+            .replace(/\b\w/g, char => char.toUpperCase()) // Capitaliza la primera letra de cada palabra
+            .replace(/&/g, ' & '); // Asegura que el '&' esté bien espaciado
+    }
     
     // --- NUEVA FUNCIÓN PARA EL CONFETI ---
     // Esta función encapsula la lógica de lanzar el confeti
+    // NOTA: Asegúrate de que la librería 'confetti' esté cargada en tu HTML
     function fireConfetti() {
-        confetti({
-            particleCount: 900,
-            spread: 70,
-            origin: { y: 0.6 }
-        });
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 900,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
     }
 
     // --- 4. Función para Actualizar el Resumen del Pedido ---
@@ -188,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let allRequiredFieldsSelected = false;
 
         if (nombre && celular && isPerfumeSelected && selectedTamaño && selectedMetodoPago) {
-            message = `¡Excelente, ${nombre}! Tu pedido de **${finalPerfumeDisplay}** en **${selectedTamaño.charAt(0).toUpperCase() + selectedTamaño.slice(1)}** (precio: ${formatPrice(selectedPrecio)}) con pago **${metodoPagoText}${additionalCostMessage}** está listo.\n\nPresiona "Enviar Pedido por WhatsApp" para confirmar.`;
+            message = `¡Excelente, ${nombre}! Tu pedido de **${finalPerfumeDisplay}** en presentación **${selectedTamaño.charAt(0).toUpperCase() + selectedTamaño.slice(1)}** (precio: ${formatPrice(selectedPrecio)}) con pago **${metodoPagoText}${additionalCostMessage}** está listo.\n\nPresiona "Enviar Pedido por WhatsApp" para confirmar.`;
             allRequiredFieldsSelected = true;
         } else {
             message = 'Por favor, completa todos los campos para ver el resumen de tu pedido.';
@@ -196,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         messageArea.innerText = message;
         sendWhatsappButton.disabled = !allRequiredFieldsSelected;
+        // La clase 'disabled' debe manejarse con CSS para el estilo
         sendWhatsappButton.classList.toggle('disabled', !allRequiredFieldsSelected);
     }
 
@@ -203,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateGlobalPerfumeSelect() {
         let allPerfumes = [];
         for (const brand in perfumesData) {
-            const formattedBrandName = brand.replace(/\b\w/g, char => char.toUpperCase()).replace(/&/g, ' & ');
+            const formattedBrandName = formatBrandName(brand);
             perfumesData[brand].forEach(perfume => {
                 allPerfumes.push({ name: perfume, brand: formattedBrandName });
             });
@@ -212,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
         perfumeGlobalSelect.innerHTML = '<option value="">Selecciona un perfume de la lista (Global)</option>';
         allPerfumes.forEach(p => {
             const option = document.createElement('option');
-            option.value = p.name;
+            option.value = `${p.name} (${p.brand})`; // Valor único que incluye marca para el WhatsApp
             option.textContent = `${p.name} (${p.brand})`;
             perfumeGlobalSelect.appendChild(option);
         });
@@ -224,10 +235,11 @@ document.addEventListener('DOMContentLoaded', function() {
         casaSelect.innerHTML = '<option value="">Selecciona una casa/marca</option>';
         brands.forEach(brand => {
             const option = document.createElement('option');
-            option.value = brand;
-            option.textContent = brand.replace(/\b\w/g, char => char.toUpperCase()).replace(/&/g, ' & ');
+            option.value = brand; // Usamos la clave minúscula como valor
+            option.textContent = formatBrandName(brand); // Mostramos el nombre formateado
             casaSelect.appendChild(option);
         });
+        // Si tienes CSS para 'hidden', lo mantienes.
         perfumeSelect.classList.add('hidden');
     }
 
@@ -237,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     perfumeGlobalSelect.addEventListener('change', function() {
         if (this.value) {
+            // Deshabilita y resetea los select de marca/perfume
             casaSelect.value = "";
             perfumeSelect.innerHTML = '<option value="">Selecciona un perfume</option>';
             perfumeSelect.classList.add('hidden');
@@ -248,16 +261,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     casaSelect.addEventListener('change', function() {
-        const selectedBrand = this.value;
+        const selectedBrandKey = this.value;
         perfumeSelect.innerHTML = '<option value="">Selecciona un perfume</option>';
 
-        if (selectedBrand) {
+        if (selectedBrandKey) {
+            // Deshabilita el select global
             perfumeGlobalSelect.value = "";
             perfumeGlobalSelect.disabled = true;
+            
             perfumeSelect.disabled = false;
             perfumeSelect.classList.remove('hidden');
-            if (perfumesData[selectedBrand]) {
-                perfumesData[selectedBrand].forEach(perfume => {
+            
+            if (perfumesData[selectedBrandKey]) {
+                perfumesData[selectedBrandKey].forEach(perfume => {
                     const option = document.createElement('option');
                     option.value = perfume;
                     option.textContent = perfume;
@@ -265,6 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         } else {
+            // Habilita el select global si no hay marca seleccionada
             perfumeSelect.classList.add('hidden');
             perfumeSelect.disabled = true;
             perfumeGlobalSelect.disabled = false;
@@ -279,7 +296,8 @@ document.addEventListener('DOMContentLoaded', function() {
             tamañoButtons.forEach(btn => btn.classList.remove('selected'));
             this.classList.add('selected');
             selectedTamaño = this.dataset.tamaño;
-            selectedPrecio = parseFloat(this.dataset.precio);
+            // Aseguramos que el precio sea un número
+            selectedPrecio = parseFloat(this.dataset.precio || 0);
             updateOrderSummary();
         });
     });
@@ -302,16 +320,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- 6. Lógica para el Botón de WhatsApp ---
+    // --- 6. Lógica para el Botón de WhatsApp (CORREGIDA) ---
     sendWhatsappButton.addEventListener('click', function() {
         const nombre = nombreInput.value.trim();
         const celular = celularInput.value.trim();
         let finalPerfume = '';
-
+        
+        // Obtener el perfume final de la forma más legible
         if (perfumeGlobalSelect.value) {
+            // Si viene del Global Select, el textContent ya incluye la marca formateada
             finalPerfume = perfumeGlobalSelect.options[perfumeGlobalSelect.selectedIndex].textContent;
         } else if (casaSelect.value && perfumeSelect.value) {
-            finalPerfume = `${perfumeSelect.options[perfumeSelect.selectedIndex].textContent} (${casaSelect.options[casaSelect.selectedIndex].textContent})`;
+            // Si viene de Casa/Perfume, combinamos el nombre del perfume con la marca formateada
+            const selectedCasaText = casaSelect.options[casaSelect.selectedIndex].textContent;
+            const selectedPerfumeText = perfumeSelect.options[perfumeSelect.selectedIndex].textContent;
+            finalPerfume = `${selectedPerfumeText} (${selectedCasaText})`;
         }
 
         if (!nombre || !celular || !finalPerfume || !selectedTamaño || !selectedMetodoPago) {
@@ -319,8 +342,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // --- EL CONFETI YA NO SE DISPARA AQUÍ ---
-        
         let metodoPagoText = '';
         let whatsappAdditionalMessage = '';
         const costoAdicionalCredito = 5000;
@@ -331,19 +352,24 @@ document.addEventListener('DOMContentLoaded', function() {
             metodoPagoText = 'Efectivo (Contra entrega)';
         } else if (selectedMetodoPago === 'credito') {
             metodoPagoText = 'Crédito o Plazos';
-            whatsappAdditionalMessage = `\n\nTen en cuenta que con la opción de pago Crédito o Plazos tiene un costo adicional de ${formatPrice(costoAdicionalCredito)} en cualquier presentación.`;
+            whatsappAdditionalMessage = `\n\n*Ten en cuenta:* La opción de pago Crédito o Plazos tiene un costo adicional de ${formatPrice(costoAdicionalCredito)} en cualquier presentación.`;
         }
         
+        // MENSAJE DE WHATSAPP MEJORADO
         const whatsappNumber = '573138094678';
-        const whatsappMessage = `Hola, mi nombre es ${nombre}. Estoy interesado(a) en el perfume "${finalPerfume}" de ${selectedTamaño.charAt(0).toUpperCase() + selectedTamaño.slice(1)} por ${formatPrice(selectedPrecio)}. Mi método de pago es ${metodoPagoText}.${whatsappAdditionalMessage} Mi número de celular es ${celular}. Por favor, confírmame el pedido.`;
+        const whatsappMessage = `Hola, mi nombre es *${nombre}* y mi celular es ${celular}.%0A%0AEstoy interesado(a) en el siguiente pedido:%0A%0A*Perfume:* ${finalPerfume}%0A*Tamaño/Presentación:* ${selectedTamaño.charAt(0).toUpperCase() + selectedTamaño.slice(1)}%0A*Precio Total:* ${formatPrice(selectedPrecio)}%0A*Método de Pago:* ${metodoPagoText}${whatsappAdditionalMessage}%0A%0APor favor, ayúdame a confirmar la compra y coordinar el envío. ¡Gracias!`;
+        
         const encodedMessage = encodeURIComponent(whatsappMessage);
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
         window.open(whatsappUrl, '_blank');
 
         alert("¡Pedido enviado! Hemos abierto WhatsApp para que puedas confirmar tu compra.");
+        
+        // Lanzar confeti DESPUÉS de enviar el pedido
+        fireConfetti();
 
-        // Resetear el formulario y el estado
+        // Resetear el formulario y el estado (La lógica de reseteo es correcta)
         nombreInput.value = '';
         celularInput.value = '';
         perfumeGlobalSelect.value = '';
@@ -363,31 +389,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- 7. Inicializar al Cargar la Página ---
-    // Llamada a la nueva función de confeti. Esto la activará cuando la página se cargue.
-    fireConfetti();
+    // NO lanzamos el confeti al cargar, sino al enviar el pedido (Línea 495)
+    // fireConfetti(); 
     populateGlobalPerfumeSelect();
     populateCasaSelect();
     updateOrderSummary();
 });
+
+// Función externa (asumo que está en tu HTML o en otro JS, pero la mantengo para referencia)
 function lanzarEfecto() {
     // Definimos las imágenes para el confeti
-    const images = ['imagen/billete.png', 'imagen/moneda-oro.png']; // Asegúrate de que las rutas de las imágenes son correctas
+    const images = ['imagen/billete.png', 'imagen/moneda-oro.png']; 
 
-    // Obtenemos la posición del botón
+    // Obtenemos la posición del botón (Asegúrate de que 'botonConfeti' exista)
     const button = document.getElementById('botonConfeti');
+    if (!button || typeof confetti !== 'function') return;
+
     const rect = button.getBoundingClientRect();
 
     // Lanzamos el confeti desde la posición del botón
     confetti({
-        particleCount: 150, // Más partículas para un efecto más denso
-        spread: 120, // Ampliamos la dispersión
+        particleCount: 150, 
+        spread: 120, 
         origin: {
             x: (rect.left + rect.right) / window.innerWidth / 2,
             y: rect.top / window.innerHeight
         },
         // Usamos las imágenes como confeti
-        shapes: images.map(img => `<img src="${img}" style="width: 50px; height: 50px;">`),
-        scalar: 2, // Aumentamos el tamaño de las partículas
-        ticks: 200 // Duración del efecto
+        shapes: images.map(img => ({
+            type: 'image',
+            src: img,
+            width: 50,
+            height: 50
+        })),
+        scalar: 2, 
+        ticks: 200 
     });
 }
