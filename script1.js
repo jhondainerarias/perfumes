@@ -346,14 +346,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Construcción del mensaje con formato WhatsApp (usando %0A para saltos de línea y * para negrita)
-            let message = `¡Hola! Me gustaría hacer un pedido. 😉%0A%0A`; 
-            message += `*Detalles del Pedido*:%0A`;
-            message += `*Perfume:* ${selectedPerfume} (*${selectedBrand}*)%0A`;
-            message += `*Tamaño:* ${selectedSize}%0A`;
-            message += `*Método de Pago:* ${selectedPayment}%0A%0A`;
-            message += `*Datos del Cliente*:%0A`;
-            message += `*Nombre:* ${clientName}%0A`;
-            message += `*Teléfono:* ${clientPhone}`;
+            let message = `¡Hola! mi pedido es.\n`;
+                message += `*Perfume:* ${selectedPerfume} (${selectedBrand})\n`;
+                message += `*Tamaño:* ${selectedSize}\n`;
+                message += `*Método de Pago:* ${selectedPayment}\n`;
+                message += `*Nombre:* ${clientName}\n`;
+                message += `*Teléfono:* ${clientPhone}`;
 
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
@@ -424,4 +422,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
 
