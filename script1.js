@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const clientPhone = document.getElementById('client-phone').value.trim();
 
             // ⚠️ Número de Teléfono de WhatsApp - ¡CAMBIA ESTE NÚMERO!
-            const whatsappNumber = '573001234567'; // 🚨 REEMPLAZA CON TU NÚMERO REAL (CódigoPaís+Número)
+            const whatsappNumber = '573138094678'; // 🚨 REEMPLAZA CON TU NÚMERO REAL (CódigoPaís+Número)
 
             if (!clientName || !clientPhone) {
                 alert('Por favor, completa tu nombre y teléfono para enviar el pedido.');
@@ -424,3 +424,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
