@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -38,6 +37,84 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
     border-color: #5b9edc; 
     cursor: pointer;
+}
+/*
+ * 1. Estilos generales de la barra contenedora (Asume que están dentro de un <div> o <nav>)
+ */
+.nav-bar-integrada {
+    display: flex; /* Habilita Flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los botones */
+    align-items: center;
+    
+    /* Para que la barra se quede fija en la parte inferior (común en apps) */
+    position: fixed; 
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    
+    background-color: #333; /* Fondo oscuro para la barra */
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra superior */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+/*
+ * 2. Estilos comunes para ambos botones (<a>)
+ */
+.btn-inicio-integrado,
+.btn-catalogo-integrado {
+    /* Reseteo de estilos de enlace */
+    text-decoration: none; 
+    color: #ffffff; /* Texto blanco */
+    font-size: 14px;
+    font-weight: 600;
+    
+    /* Dimensiones y apariencia */
+    flex: 1; /* Permite que ambos ocupen el mismo espacio */
+    text-align: center; /* Centra el texto dentro del botón */
+    padding: 10px 5px;
+    margin: 0 5px; /* Espacio entre los botones */
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.1s ease; /* Animación suave */
+}
+
+/*
+ * 3. Estilos específicos para el botón "Inicio"
+ */
+.btn-inicio-integrado {
+    background-color: #4CAF50; /* Un verde vibrante (puedes cambiarlo) */
+    border: 2px solid #4CAF50;
+}
+
+/* * 4. Estilos específicos para el botón "Catálogo" 
+ */
+.btn-catalogo-integrado {
+    background-color: #008CBA; /* Un azul moderno (puedes cambiarlo) */
+    border: 2px solid #008CBA;
+    line-height: 1.2; /* Ajusta la altura de la línea para mejor centrado si no tiene <br> */
+}
+
+
+/* * 5. Efectos de Hover y Click para ambos
+ */
+.btn-inicio-integrado:hover {
+    background-color: rgb(55, 198, 241);
+}
+
+.btn-catalogo-integrado:hover {
+    background-color: #007bb5;
+}
+
+.btn-inicio-integrado:active,
+.btn-catalogo-integrado:active {
+    transform: scale(0.98); /* Pequeño efecto de hundimiento al hacer click */
+}
+
+/* Estilo para el <br> dentro del botón Inicio para un salto de línea limpio */
+.btn-inicio-integrado br {
+    display: block;
+    content: "";
+    margin-top: -3px; /* Ajusta el espacio vertical del salto de línea */
 }
 .menu-flotante-transparente {
     /* Posicionamiento y visibilidad */
@@ -256,13 +333,13 @@ input[type="text"], input[type="tel"], select {
             </div>
         </div>
 
-        <a href="index.html" class="btn-inicio-integrado">
-            Inicio
-            <br>
-        </a>
-        <a href="catalogo.html" class="btn-catalogo-integrado">
-            catalogo
-        </a>
+    <a href="index.html" class="btn-inicio-integrado">
+        Inicio
+    </a>
+    <a href="catalogo.html" class="btn-catalogo-integrado">
+        Catalogo
+    </a>
+</nav>
     </header>
     </div>
       
