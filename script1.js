@@ -240,8 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Variables para almacenar la selección del usuario
     let selectedBrand = '';
     let selectedPerfume = '';
-    let selectedSize = '';
-    let selectedPayment = '';
+    let selectedSize = ''; 
+    let selectedPayment = ''; 
 
     // Función para mostrar un paso y ocultar los demás
     const showStep = (stepId) => {
@@ -251,11 +251,29 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById(stepId).classList.remove('hidden');
     };
 
-    // Función para actualizar el resumen del pedido
-    const updateSummary = () => {
+    // Función para actualizar el resumen BÁSICO (Marca y Perfume)
+    const updateBasicSummary = () => {
         document.getElementById('summary-brand').textContent = selectedBrand;
         document.getElementById('summary-perfume').textContent = selectedPerfume;
     };
+    
+    // Función para actualizar el resumen COMPLETO (Paso 4)
+    const updateFinalSummary = () => {
+        document.getElementById('summary-brand').textContent = selectedBrand;
+        document.getElementById('summary-perfume').textContent = selectedPerfume;
+        
+        // Se asegura de que los elementos existan antes de actualizar el texto
+        const summarySizeElement = document.getElementById('summary-size');
+        const summaryPaymentElement = document.getElementById('summary-payment');
+
+        if (summarySizeElement) {
+            summarySizeElement.textContent = selectedSize;
+        }
+        if (summaryPaymentElement) {
+            summaryPaymentElement.textContent = selectedPayment;
+        }
+    }
+
 
     // Función para crear la lista de perfumes
     const createPerfumeList = (brand) => {
@@ -268,8 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.classList.add('perfume-item');
                 li.addEventListener('click', () => {
                     selectedPerfume = perfume.nombre;
-                    updateSummary();
-                    showStep('step-3');
+                    updateBasicSummary();
+                    showStep('step-3'); // Pasa al paso 3 (Selección de Tamaño/Pago)
                 });
                 perfumeList.appendChild(li);
             });
@@ -297,45 +315,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Event listener para el botón "Siguiente"
+    // 🚀 EVENT LISTENER CORREGIDO: Botón "Siguiente" (del paso 3 al 4)
     if (nextButton) {
         nextButton.addEventListener('click', () => {
             selectedSize = document.getElementById('size-select').value;
             selectedPayment = document.getElementById('payment-method-select').value;
-            if (selectedSize && selectedPayment) {
-                showStep('step-4');
+            
+            // Verificación de selección válida
+            if (selectedSize && selectedPayment && selectedSize !== 'default' && selectedPayment !== 'default') {
+                updateFinalSummary(); // Actualiza el resumen completo para el Paso 4
+                showStep('step-4'); // Pasa al paso 4 (Datos del cliente)
             } else {
-                alert('Por favor, selecciona un tamaño y un método de pago.');
+                alert('Por favor, selecciona un tamaño y un método de pago válidos.');
             }
         });
     }
 
-    // Event listener para el botón de "Hacer la compra por WhatsApp"
+    // 📲 FUNCIÓN WHATSAPP (Corregida con número y formato de mensaje)
     if (sendOrderBtn) {
         sendOrderBtn.addEventListener('click', () => {
-            const clientName = document.getElementById('client-name').value;
-            const clientPhone = document.getElementById('client-phone').value;
+            const clientName = document.getElementById('client-name').value.trim();
+            const clientPhone = document.getElementById('client-phone').value.trim();
 
-            if (clientName && clientPhone) {
-                let message = `¡Hola! Me gustaría hacer un pedido.\n`;
-                message += `*Perfume:* ${selectedPerfume} (${selectedBrand})\n`;
-                message += `*Tamaño:* ${selectedSize}\n`;
-                message += `*Método de Pago:* ${selectedPayment}\n`;
-                message += `*Nombre:* ${clientName}\n`;
-                message += `*Teléfono:* ${clientPhone}`;
+            // ⚠️ Número de Teléfono de WhatsApp - ¡CAMBIA ESTE NÚMERO!
+            const whatsappNumber = '573001234567'; // 🚨 REEMPLAZA CON TU NÚMERO REAL (CódigoPaís+Número)
 
-                // Codifica el mensaje para la URL de WhatsApp
-                const whatsappUrl = `https://wa.me/TU_NUMERO_DE_TELEFONO?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-            } else {
-                alert('Por favor, completa tu nombre y teléfono.');
+            if (!clientName || !clientPhone) {
+                alert('Por favor, completa tu nombre y teléfono para enviar el pedido.');
+                return;
             }
+
+            // Construcción del mensaje con formato WhatsApp (usando %0A para saltos de línea y * para negrita)
+            let message = `¡Hola! Me gustaría hacer un pedido. 😉%0A%0A`; 
+            message += `*Detalles del Pedido*:%0A`;
+            message += `*Perfume:* ${selectedPerfume} (*${selectedBrand}*)%0A`;
+            message += `*Tamaño:* ${selectedSize}%0A`;
+            message += `*Método de Pago:* ${selectedPayment}%0A%0A`;
+            message += `*Datos del Cliente*:%0A`;
+            message += `*Nombre:* ${clientName}%0A`;
+            message += `*Teléfono:* ${clientPhone}`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
         });
     }
 
-    // --- NUEVA FUNCIONALIDAD DE BÚSQUEDA ---
+    // --- FUNCIONALIDAD DE BÚSQUEDA ---
 
-    // Crear un array de todos los perfumes para la búsqueda, respetando la estructura de datos original
+    // 1. Crear un array de todos los perfumes para la búsqueda
     const allPerfumes = [];
     for (const brand in perfumeData) {
         perfumeData[brand].forEach(perfume => {
@@ -343,15 +372,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event listener para el campo de búsqueda
+    // 2. Event listener para el campo de búsqueda
     searchInput.addEventListener('input', () => {
         const query = searchInput.value.toLowerCase().trim();
         const resultsContainer = document.getElementById('search-results');
         
-        resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
-        resultsContainer.classList.add('hidden'); // Ocultar por defecto
+        resultsContainer.innerHTML = ''; 
+        resultsContainer.classList.add('hidden'); 
 
-        if (query.length > 1) { // Buscar si la consulta tiene más de 1 carácter
+        if (query.length > 1) { 
             const matches = allPerfumes.filter(p => p.name.toLowerCase().includes(query));
             
             if (matches.length > 0) {
@@ -361,24 +390,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     resultItem.classList.add('search-result-item');
                     resultItem.textContent = `${match.name} (${match.brand})`;
                     resultItem.addEventListener('click', () => {
-                        // Simular clic en la marca y en el perfume
+                        // Simular la selección
                         const brandElement = document.querySelector(`.brand-item[data-brand="${match.brand}"]`);
                         if (brandElement) {
-                            brandElement.click(); // Simular un clic en la marca
+                            // 1. Simular clic en la marca para cargar la lista de perfumes (Paso 2)
+                            selectedBrand = match.brand;
+                            createPerfumeList(selectedBrand);
+                            showStep('step-2');
                             
-                            // Después de un breve retraso, seleccionar el perfume
-                            setTimeout(() => {
-                                // Aquí buscamos el elemento del perfume dentro de la lista recién creada
-                                const perfumeElement = document.querySelector(`#perfume-list li`);
-                                if (perfumeElement) {
-                                    selectedPerfume = match.name;
-                                    updateSummary();
-                                    showStep('step-3');
-                                }
-                            }, 500); 
+                            // 2. Pasar directamente al Paso 3 con el perfume seleccionado
+                            selectedPerfume = match.name;
+                            updateBasicSummary();
+                            showStep('step-3');
+
                         }
-                        searchInput.value = ''; // Limpiar el campo
-                        resultsContainer.classList.add('hidden'); // Ocultar resultados
+                        searchInput.value = ''; 
+                        resultsContainer.classList.add('hidden');
                     });
                     resultsContainer.appendChild(resultItem);
                 });
@@ -386,11 +413,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Se agrega el event listener para el click en el documento. Esto sirve para ocultar los resultados de la búsqueda
+    // 3. Ocultar los resultados de la búsqueda al hacer clic fuera
     document.addEventListener('click', (event) => {
         const searchContainer = document.querySelector('.search-container');
-        if (!searchContainer.contains(event.target)) {
-            document.getElementById('search-results').classList.add('hidden');
+        const resultsContainer = document.getElementById('search-results');
+        // Asegúrate de que no se oculte si se hace clic dentro del contenedor de búsqueda.
+        if (resultsContainer && searchContainer && !searchContainer.contains(event.target)) {
+            resultsContainer.classList.add('hidden');
         }
     });
 
