@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { nombre: 'Lacoste Noir Negra Men' }, { nombre: 'Lacoste Red Men' }, { nombre: 'Lacoste Rouge Men' },
             { nombre: 'Lacoste Bleu Men' }, { nombre: 'Lacoste Amarilla Men' }, { nombre: 'Lacoste Men' }
         ],
-        'Yambal': [
+        'Yanbal': [
             { nombre: 'Gaia dama' }, { nombre: 'Osadia dama' }, { nombre: 'Ccori Rosé dama' },
             { nombre: 'Ccori dama' }, { nombre: 'Ohm Black men' }, { nombre: 'Celos dama' },
             { nombre: 'Cielo dama' }, { nombre: 'Temptation Dama' }, { nombre: 'Temptation Men' },
@@ -422,5 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
 
 
