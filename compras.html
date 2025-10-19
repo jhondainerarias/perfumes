@@ -4,321 +4,426 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de Perfumes | jhon dainer arias</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
-   
-    <style>  body {
-    font-family: 'Roboto', sans-serif;
-    /* Añade el linear-gradient antes de la URL de la imagen */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/001.jpg');
-    background-size: cover; /* Para que la imagen cubra toda la pantalla */
-    background-position: center; /* Para centrar la imagen */
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    </head>
+    <style> 
+        /* ======================================= */
+/* VARIABLES GLOBALES             */
+/* ======================================= */
+:root {
+    /* Colores */
+    --primary-color: #f7b733; /* Dorado/Ámbar de Lujo */
+    --secondary-color: #fc4a1a; /* Rojo/Naranja de Acento */
+    --text-light: #fcb65a;
+    --text-dark: #1f1f1f;
+    --background-dark: #040344; /* Fondo Oscuro Profundo */
+    --card-bg-light: rgba(255, 255, 255, 0.08); /* Blanco muy transparente para Glassmorphism */
+
+    /* Estructura y Efectos */
+    --border-radius-lg: 18px;
+    --transition-speed: 0.3s;
+    --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --shadow-deep: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
-/* 🟢 Estilos ELEGANTES para el LOGO CUADRADO 🟢 */
+/* ======================================= */
+/* ESTILOS BASE                */
+/* ======================================= */
 
+html {
+    scroll-behavior: smooth;
+}
 
-/* IMPORTANTE: ESTO SOLO AFECTA A LA IMAGEN DENTRO DE .header-logo */
-.header-left .header-logo img { 
+body {
+    font-family: 'Poppins', sans-serif; /* Tipografía moderna y legible */
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    /* Efecto de fondo sutil si se usa imagen */
+    /* background-image: linear-gradient(135deg, rgba(15, 15, 26, 0.9), rgba(40, 40, 60, 0.9)), url('ruta/a/fondo-perfume.jpg'); */
+    background-size: cover;
+    background-position: center;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ======================================= */
+/* HEADER                    */
+/* ======================================= */
+
+.page-header {
+    width: 100%;
+    padding: 15px 5%;
+    background-color: rgba(30, 30, 50, 0.9); /* Barra semi-transparente */
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-logo {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    flex-shrink: 0; /* Previene que se encoja */
+    transition: transform var(--transition-speed) ease;
+}
+
+.header-logo img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
+    display: block;
 }
 
 .header-logo:hover {
-    transform: scale(1.08);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-    border-color: #5b9edc; 
-    cursor: pointer;
-}
-/*
- * 1. Estilos generales de la barra contenedora (Asume que están dentro de un <div> o <nav>)
- */
-.nav-bar-integrada {
-    display: flex; /* Habilita Flexbox */
-    justify-content: space-around; /* Distribuye el espacio entre los botones */
-    align-items: center;
-    
-    /* Para que la barra se quede fija en la parte inferior (común en apps) */
-    position: fixed; 
-    bottom: 0; 
-    left: 0;
-    width: 100%;
-    
-    background-color: #333; /* Fondo oscuro para la barra */
-    padding: 10px 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra superior */
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--secondary-color);
 }
 
-/*
- * 2. Estilos comunes para ambos botones (<a>)
- */
-.btn-inicio-integrado,
-.btn-catalogo-integrado {
-    /* Reseteo de estilos de enlace */
-    text-decoration: none; 
-    color: #ffffff; /* Texto blanco */
-    font-size: 14px;
-    font-weight: 600;
-    
-    /* Dimensiones y apariencia */
-    flex: 1; /* Permite que ambos ocupen el mismo espacio */
-    text-align: center; /* Centra el texto dentro del botón */
-    padding: 10px 5px;
-    margin: 0 5px; /* Espacio entre los botones */
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.1s ease; /* Animación suave */
+.header-title h1 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--text-light);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/*
- * 3. Estilos específicos para el botón "Inicio"
- */
+/* Botón de Inicio Integrado */
 .btn-inicio-integrado {
-    background-color: #4CAF50; /* Un verde vibrante (puedes cambiarlo) */
-    border: 2px solid #4CAF50;
-}
-
-/* * 4. Estilos específicos para el botón "Catálogo" 
- */
-.btn-catalogo-integrado {
-    background-color: #008CBA; /* Un azul moderno (puedes cambiarlo) */
-    border: 2px solid #008CBA;
-    line-height: 1.2; /* Ajusta la altura de la línea para mejor centrado si no tiene <br> */
-}
-
-
-/* * 5. Efectos de Hover y Click para ambos
- */
-.btn-inicio-integrado:hover {
-    background-color: rgb(55, 198, 241);
-}
-
-.btn-catalogo-integrado:hover {
-    background-color: #007bb5;
-}
-
-.btn-inicio-integrado:active,
-.btn-catalogo-integrado:active {
-    transform: scale(0.98); /* Pequeño efecto de hundimiento al hacer click */
-}
-
-/* Estilo para el <br> dentro del botón Inicio para un salto de línea limpio */
-.btn-inicio-integrado br {
-    display: block;
-    content: "";
-    margin-top: -3px; /* Ajusta el espacio vertical del salto de línea */
-}
-.menu-flotante-transparente {
-    /* Posicionamiento y visibilidad */
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    
-    /* Apariencia y transparencia */
-    background-color: transparent;
-    color: rgb(200, 240, 250); /* Color del texto para que sea visible */
-    border: 2px solid rgb(247, 242, 201); /* Borde para definir la forma del botón */
-    border-radius: 5px;
-    padding: 10px 15px;
     text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease; /* Efecto de transición suave */
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    padding: 8px 20px;
+    border-radius: 50px; /* Forma de píldora */
+    font-weight: 500;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
 }
 
-/* Efecto al pasar el cursor sobre el botón */
-.menu-flotante-transparente:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Color semi-transparente blanco */
-    color: white;
+.btn-inicio-integrado:hover {
+    background-color: #ff6347; /* Tono más claro al pasar el ratón */
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
 }
+
+/* ======================================= */
+/* CONTENEDOR PRINCIPAL         */
+/* ======================================= */
 
 .main-container {
+    padding: 20px;
     width: 100%;
-    max-width: 500px;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
 }
 
 .purchase-panel {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0d2;
-    border-radius: 12px;
+    /* Estilo Glassmorphism / Dark Glass */
+    background-color: var(--card-bg-light); 
+    backdrop-filter: blur(15px); /* Efecto de desenfoque de fondo */
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-deep);
     padding: 30px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
 }
 
 .panel-title {
-    color: #333;
-    font-size: 2em;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
 }
 
-.step {
-    animation: fadeIn 0.5s ease-in-out;
+/* ======================================= */
+/* BUSCADOR Y ENTRADAS             */
+/* ======================================= */
+
+.search-container {
+    margin-bottom: 25px;
+    position: relative;
 }
 
-.hidden {
-    display: none;
-}
-
-.label-input, .label-select {
-    display: block;
-    text-align: left;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-}
-
-input[type="text"], input[type="tel"], select {
+#perfume-search, input[type="text"], input[type="tel"] {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1em;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(238, 93, 93, 0.15); /* Fondo input semitransparente */
+    color: var(--text-light);
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
     box-sizing: border-box;
 }
 
-.next-btn, .back-btn, #send-order-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 1.1em;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
+#perfume-search::placeholder, input::placeholder {
+    color: rgba(245, 7, 233, 0.5);
 }
 
-.next-btn, #send-order-btn {
-    background-color: #25d366;
-    color: white;
+#perfume-search:focus, input:focus, select:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 3px var(--primary-color); /* Anillo de enfoque elegante */
 }
 
-.next-btn:hover, #send-order-btn:hover {
-    background-color: #128c7e;
-}
+/* ======================================= */
+/* SELECCIÓN DE MARCAS           */
+/* ======================================= */
 
-.back-btn {
-    background-color: #f0f0f0;
-    color: #333;
-}
-
-.back-btn:hover {
-    background-color: #e0e0e0;
+.step-subtitle {
+    font-size: 1.5rem;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
 }
 
 .brand-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive Grid */
     gap: 15px;
-    margin-top: 20px;
+    padding: 10px;
 }
 
 .brand-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    background-color: var(--card-bg-light);
+    border-radius: 12px;
+    padding: 10px 5px;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 3px solid transparent;
-    border-radius: 8px;
-    padding: 5px;
-}
-
-.brand-icon {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    border-radius: 8px;
-    margin-bottom: 5px;
+    transition: all var(--transition-speed) ease;
+    border: 1px solid transparent;
 }
 
 .brand-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-soft);
+    border-color: var(--primary-color);
 }
 
 .brand-item.selected {
-    border-color: #25d366;
+    border: 3px solid var(--primary-color);
+    background-color: rgba(247, 183, 51, 0.2); /* Tono primary semi-transparente */
     transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.step-subtitle {
-    font-size: 1.5em;
-    color: #444;
-    margin-bottom: 15px;
+.brand-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
 }
+
+.brand-item span {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* ======================================= */
+/* LISTAS Y PASOS              */
+/* ======================================= */
 
 .dynamic-list {
     list-style: none;
     padding: 0;
-    text-align: left;
+    margin: 0;
 }
 
 .dynamic-list li {
-    padding: 12px;
-    margin-bottom: 8px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    background-color: var(--card-bg-light);
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
     cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    border-left: 5px solid transparent;
 }
 
 .dynamic-list li:hover {
-    background-color: #f9f9f9;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-left-color: var(--primary-color);
 }
 
 .dynamic-list li.selected {
-    background-color: #e0f2f1;
-    border-color: #25d366;
-    font-weight: bold;
+    border-left-color: var(--secondary-color);
+    font-weight: 600;
 }
 
+/* Contenedores de pasos */
+.step.hidden {
+    display: none;
+}
+
+/* ======================================= */
+/* FORMULARIOS Y SELECTS          */
+/* ======================================= */
+
+.label-select, .label-input {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-light);
+    font-size: 1rem;
+    /* Eliminar estilo nativo de flecha para más control (opcional) */
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23f7b733' d='M10 12l-6-6h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+}
+
+.delivery {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #fca311; /* Advertencia en un tono ámbar */
+    font-style: italic;
+}
+
+/* Resumen del Pedido */
 .order-summary {
-    background-color: #f9f9f9;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid var(--primary-color);
     padding: 15px;
     border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: left;
-    border: 1px solid #eee;
+    margin-bottom: 25px;
 }
-
 .order-summary p {
     margin: 5px 0;
-    color: #666;
+    font-size: 1rem;
 }
-
 .order-summary span {
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+/* ======================================= */
+/* BOTONES                  */
+/* ======================================= */
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 50px; /* Botones grandes y redondeados */
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: all var(--transition-speed) ease;
+    text-transform: uppercase;
+}
+
+/* Botón de Siguiente/Atrás */
+.next-btn {
+    background-color: var(--primary-color);
+    color: var(--text-dark);
+}
+
+.next-btn:hover {
+    background-color: #ffc45d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(247, 183, 51, 0.4);
+}
+
+.back-btn {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--text-light);
+    padding: 12px;
+    margin-top: 15px;
+}
+
+.back-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--secondary-color);
+}
+
+/* Botón Principal de Acción (WhatsApp) */
+#send-order-btn {
+    background-color: #25D366; /* Verde WhatsApp */
+    color: white;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+}
+
+#send-order-btn:hover {
+    background-color: #128C7E;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+}
+
+/* ======================================= */
+/* RESPONSIVE                */
+/* ======================================= */
+
+@media (max-width: 600px) {
+    .purchase-panel {
+        padding: 20px;
+        margin-top: 10px;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    
+    .panel-title {
+        font-size: 1.6rem;
+    }
+    
+    .header-title h1 {
+        font-size: 1rem;
+    }
+
+    .brand-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 10px;
+    }
+    
+    .brand-icon {
+        width: 50px;
+        height: 50px;
     }
 }
 </style>
 
-</head>
+
  <main class="main-container">
         <div class="purchase-panel"> 
 <body class="attention-grabber">
@@ -333,19 +438,11 @@ input[type="text"], input[type="tel"], select {
             </div>
         </div>
 
-    <a href="index.html" class="btn-inicio-integrado">
-        Inicio
-    </a>
-    <a href="catalogo.html" class="btn-catalogo-integrado">
-        Catalogo
-    </a>
-</nav>
+        <a href="index.html" class="btn-inicio-integrado">
+            Inicio
+        </a>
     </header>
-    </div>
-      
-        
-    <main class="main-container">
-        <div class="purchase-panel"> 
+    
           
             <h2 class="panel-title">Pagina de compras </h2>
             <div class="search-container">
@@ -376,8 +473,8 @@ input[type="text"], input[type="tel"], select {
                         <img src="img/lacoste.jpg" alt="Lacoste" class="brand-icon">
                         <span>Lacoste</span>
                     </div>
-                    <div class="brand-item" data-brand="Yambal">
-                        <img src="img/temp.jpg" alt="Yambal" class="brand-icon">
+                    <div class="brand-item" data-brand="Yanbal">
+                        <img src="img/temp.jpg" alt="Yanbal" class="brand-icon">
                         <span>Yambal</span>
                     </div>
                     <div class="brand-item" data-brand="Victoria Secret">
