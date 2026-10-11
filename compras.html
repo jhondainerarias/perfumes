@@ -2,623 +2,900 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Perfumes | jhon dainer arias</title>
-    </head>
-    <style> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>Tienda de Perfumes | Jhon Dainer Arias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
         /* ======================================= */
-/* VARIABLES GLOBALES             */
-/* ======================================= */
-:root {
-    /* Colores */
-    --primary-color: #f7b733; /* Dorado/Ámbar de Lujo */
-    --secondary-color: #fc4a1a; /* Rojo/Naranja de Acento */
-    --text-light: #fcb65a;
-    --text-dark: #1f1f1f;
-        --background-dark: #000000f5; /* Fondo Oscuro Profundo */
-    --card-bg-light: rgba(255, 255, 255, 0.08); /* Blanco muy transparente para Glassmorphism */
+        /* VARIABLES GLOBALES - MODO OSCURO TECH   */
+        /* ======================================= */
+        :root {
+            /* Colores principales */
+            --primary: #f7b733;
+            --primary-glow: rgba(247, 183, 51, 0.35);
+            --secondary: #fc4a1a;
+            --secondary-glow: rgba(252, 74, 26, 0.3);
+            --accent: #00e5ff;
+            --accent-glow: rgba(0, 229, 255, 0.25);
+            
+            /* Fondos */
+            --bg-deep: #0a0a0f;
+            --bg-surface: #12121a;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
+            --bg-input: rgba(255, 255, 255, 0.06);
+            --bg-input-focus: rgba(255, 255, 255, 0.1);
+            
+            /* Textos */
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0c0;
+            --text-muted: #6b6b80;
+            --text-placeholder: #55556a;
+            
+            /* Bordes y efectos */
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-focus: var(--primary);
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-pill: 50px;
+            
+            /* Sombras */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.7);
+            --shadow-glow: 0 0 30px var(--primary-glow);
+            
+            /* Transiciones */
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-fast: 0.2s var(--ease-out);
+            --transition-base: 0.3s var(--ease-out);
+            --transition-slow: 0.5s var(--ease-out);
+        }
 
-    /* Estructura y Efectos */
-    --border-radius-lg: 18px;
-    --transition-speed: 0.3s;
-    --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.3);
-    --shadow-deep: 0 10px 30px rgba(0, 0, 0, 0.6);
-}
+        /* ======================================= */
+        /* RESET Y BASE                             */
+        /* ======================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-/* ======================================= */
-/* ESTILOS BASE                */
-/* ======================================= */
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
 
-html {
-    scroll-behavior: smooth;
-}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            line-height: 1.5;
+            /* Fondo con gradiente sutil */
+            background-image: 
+                radial-gradient(ellipse at 20% 0%, rgba(247, 183, 51, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(0, 229, 255, 0.04) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
 
-body {
-    font-family: 'Poppins', sans-serif; /* Tipografía moderna y legible */
-    background-color: var(--background-dark);
-    color: var(--text-light);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    /* Efecto de fondo sutil si se usa imagen */
-    /* background-image: linear-gradient(135deg, rgba(15, 15, 26, 0.9), rgba(40, 40, 60, 0.9)), url('ruta/a/fondo-perfume.jpg'); */
-    background-size: cover;
-    background-position: center;
-}
+        h1, h2, h3 {
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
 
-h1, h2, h3 {
-    color: var(--primary-color);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
+        /* ======================================= */
+        /* HEADER STICKY CON EFECTO GLASS          */
+        /* ======================================= */
+        .page-header {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            gap: 10px;
+        }
 
-/* ======================================= */
-/* HEADER                    */
-/* ======================================= */
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+            flex: 1;
+        }
 
-.page-header {
-    width: 100%;
-    padding: 15px 5%;
-    background-color: rgba(30, 30, 50, 0.9); /* Barra semi-transparente */
-    box-shadow: var(--shadow-soft);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+        .header-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1.5px solid var(--primary);
+            flex-shrink: 0;
+            transition: transform var(--transition-base), border-color var(--transition-base);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
 
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+        .header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-.header-logo {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    border-radius: 50%;
-    border: 2px solid var(--primary-color);
-    flex-shrink: 0; /* Previene que se encoja */
-    transition: transform var(--transition-speed) ease;
-}
+        .header-logo:active {
+            transform: scale(0.95);
+        }
 
-.header-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
+        .header-title {
+            min-width: 0;
+            flex: 1;
+        }
 
-.header-logo:hover {
-    transform: scale(1.1) rotate(5deg);
-    border-color: var(--secondary-color);
-}
+        .header-title h1 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.3;
+        }
 
-.header-title h1 {
-    font-size: 1.2rem;
-    margin: 0;
-    color: var(--text-light);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
+        .btn-inicio-integrado {
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--secondary), #e63e0f);
+            color: white;
+            padding: 10px 18px;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            transition: all var(--transition-base);
+            box-shadow: 0 4px 15px var(--secondary-glow);
+            flex-shrink: 0;
+            border: none;
+            cursor: pointer;
+        }
 
-/* Botón de Inicio Integrado */
-.btn-inicio-integrado {
-    text-decoration: none;
-    background-color: var(--secondary-color);
-    color: var(--text-light);
-    padding: 8px 20px;
-    border-radius: 50px; /* Forma de píldora */
-    font-weight: 500;
-    transition: background-color var(--transition-speed), transform var(--transition-speed);
-}
+        .btn-inicio-integrado:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 8px var(--secondary-glow);
+        }
 
-.btn-inicio-integrado:hover {
-    background-color: #ff6347; /* Tono más claro al pasar el ratón */
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-soft);
-}
+        /* ======================================= */
+        /* CONTENEDOR PRINCIPAL                     */
+        /* ======================================= */
+        .main-container {
+            padding: 16px;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
 
-/* ======================================= */
-/* CONTENEDOR PRINCIPAL         */
-/* ======================================= */
+        .purchase-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(24px) saturate(150%);
+            -webkit-backdrop-filter: blur(24px) saturate(150%);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-lg);
+            padding: 20px 16px;
+            width: 100%;
+            max-width: 100%;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+        }
 
-.main-container {
-    padding: 20px;
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    justify-content: center;
-}
+        /* Línea decorativa superior */
+        .purchase-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+            opacity: 0.6;
+        }
 
-.purchase-panel {
-    /* Estilo Glassmorphism / Dark Glass */
-    background-color: var(--card-bg-light); 
-    backdrop-filter: blur(15px); /* Efecto de desenfoque de fondo */
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: var(--border-radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: var(--shadow-deep);
-    padding: 30px;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-}
+        .panel-title {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
 
-.panel-title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-}
+        /* ======================================= */
+        /* BUSCADOR CON ESTILO TECH                 */
+        /* ======================================= */
+        .search-container {
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-/* ======================================= */
-/* BUSCADOR Y ENTRADAS             */
-/* ======================================= */
+        #perfume-search {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all var(--transition-base);
+            box-sizing: border-box;
+            outline: none;
+            -webkit-appearance: none;
+        }
 
-.search-container {
-    margin-bottom: 25px;
-    position: relative;
-}
+        #perfume-search::placeholder {
+            color: var(--text-placeholder);
+        }
 
-#perfume-search, input[type="text"], input[type="tel"] {
-    width: 100%;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 10px;
-    background-color: rgba(238, 93, 93, 0.15); /* Fondo input semitransparente */
-    color: var(--text-light);
-    font-size: 1rem;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-    box-sizing: border-box;
-}
+        #perfume-search:focus {
+            border-color: var(--primary);
+            background: var(--bg-input-focus);
+            box-shadow: 0 0 0 4px var(--primary-glow), var(--shadow-md);
+        }
 
-#perfume-search::placeholder, input::placeholder {
-    color: rgba(245, 7, 233, 0.5);
-}
+        /* ======================================= */
+        /* PASOS Y SUBTÍTULOS                       */
+        /* ======================================= */
+        .step {
+            animation: fadeInUp 0.4s var(--ease-out);
+        }
 
-#perfume-search:focus, input:focus, select:focus {
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 0 3px var(--primary-color); /* Anillo de enfoque elegante */
-}
+        .step.hidden {
+            display: none;
+        }
 
-/* ======================================= */
-/* SELECCIÓN DE MARCAS           */
-/* ======================================= */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.step-subtitle {
-    font-size: 1.5rem;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    color: var(--text-light);
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 5px;
-}
+        .step-subtitle {
+            font-size: 1.1rem;
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.brand-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive Grid */
-    gap: 15px;
-    padding: 10px;
-}
+        .step-subtitle::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
 
-.brand-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--card-bg-light);
-    border-radius: 12px;
-    padding: 10px 5px;
-    text-align: center;
-    cursor: pointer;
-    transition: all var(--transition-speed) ease;
-    border: 1px solid transparent;
-}
+        /* ======================================= */
+        /* GRID DE MARCAS - OPTIMIZADO MÓVIL       */
+        /* ======================================= */
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 0;
+            margin-bottom: 8px;
+        }
 
-.brand-item:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-soft);
-    border-color: var(--primary-color);
-}
+        .brand-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 12px 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border: 1.5px solid transparent;
+            position: relative;
+            overflow: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
-.brand-item.selected {
-    border: 3px solid var(--primary-color);
-    background-color: rgba(247, 183, 51, 0.2); /* Tono primary semi-transparente */
-    transform: scale(1.05);
-}
+        .brand-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary-glow), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+            pointer-events: none;
+        }
 
-.brand-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-}
+        .brand-item:active {
+            transform: scale(0.95);
+        }
 
-.brand-item span {
-    font-size: 0.85rem;
-    font-weight: 500;
-}
+        .brand-item.selected {
+            border-color: var(--primary);
+            background: rgba(247, 183, 51, 0.12);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
 
-/* ======================================= */
-/* LISTAS Y PASOS              */
-/* ======================================= */
+        .brand-item.selected::after {
+            opacity: 1;
+        }
 
-.dynamic-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+        .brand-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 8px;
+            border: 2px solid var(--border-subtle);
+            transition: all var(--transition-base);
+            background: var(--bg-surface);
+        }
 
-.dynamic-list li {
-    background-color: var(--card-bg-light);
-    border-radius: 8px;
-    padding: 12px 15px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: background-color var(--transition-speed), transform var(--transition-speed);
-    border-left: 5px solid transparent;
-}
+        .brand-item.selected .brand-icon {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
 
-.dynamic-list li:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-left-color: var(--primary-color);
-}
+        .brand-item span {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            line-height: 1.2;
+            word-break: break-word;
+            max-width: 100%;
+        }
 
-.dynamic-list li.selected {
-    border-left-color: var(--secondary-color);
-    font-weight: 600;
-}
+        .brand-item.selected span {
+            color: var(--primary);
+        }
 
-/* Contenedores de pasos */
-.step.hidden {
-    display: none;
-}
+        /* ======================================= */
+        /* LISTAS DINÁMICAS                         */
+        /* ======================================= */
+        .dynamic-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-/* ======================================= */
-/* FORMULARIOS Y SELECTS          */
-/* ======================================= */
+        .dynamic-list li {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border-left: 3px solid transparent;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
-.label-select, .label-input {
-    display: block;
-    margin-top: 20px;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: var(--primary-color);
-}
+        .dynamic-list li:active {
+            transform: scale(0.98);
+            background: var(--bg-card-hover);
+        }
 
-select {
-    width: 100%;
-    padding: 12px 15px;
-    border: none;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: var(--text-light);
-    font-size: 1rem;
-    /* Eliminar estilo nativo de flecha para más control (opcional) */
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23f7b733' d='M10 12l-6-6h12z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    background-size: 12px;
-}
+        .dynamic-list li.selected {
+            border-left-color: var(--secondary);
+            background: rgba(252, 74, 26, 0.1);
+            font-weight: 600;
+            color: var(--primary);
+        }
 
-.delivery {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #fca311; /* Advertencia en un tono ámbar */
-    font-style: italic;
-}
+        /* ======================================= */
+        /* FORMULARIOS Y SELECTS                    */
+        /* ======================================= */
+        .label-select, .label-input {
+            display: block;
+            margin-top: 16px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-/* Resumen del Pedido */
-.order-summary {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-left: 4px solid var(--primary-color);
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 25px;
-}
-.order-summary p {
-    margin: 5px 0;
-    font-size: 1rem;
-}
-.order-summary span {
-    font-weight: 600;
-    color: var(--primary-color);
-}
+        select, input[type="text"], input[type="tel"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all var(--transition-base);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            box-sizing: border-box;
+        }
 
-/* ======================================= */
-/* BOTONES                  */
-/* ======================================= */
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23f7b733' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 12px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
 
-button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 50px; /* Botones grandes y redondeados */
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 25px;
-    transition: all var(--transition-speed) ease;
-    text-transform: uppercase;
-}
+        select option {
+            background: var(--bg-surface);
+            color: var(--text-primary);
+        }
 
-/* Botón de Siguiente/Atrás */
-.next-btn {
-    background-color: var(--primary-color);
-    color: var(--text-dark);
-}
+        input::placeholder {
+            color: var(--text-placeholder);
+        }
 
-.next-btn:hover {
-    background-color: #ffc45d;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(247, 183, 51, 0.4);
-}
+        select:focus, input:focus {
+            border-color: var(--primary);
+            background: var(--bg-input-focus);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
 
-.back-btn {
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: var(--text-light);
-    padding: 12px;
-    margin-top: 15px;
-}
+        .delivery {
+            margin-top: 10px;
+            margin-bottom: 0;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-style: italic;
+            padding: 10px 14px;
+            background: rgba(0, 229, 255, 0.06);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--accent);
+            line-height: 1.4;
+        }
 
-.back-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: var(--secondary-color);
-}
+        /* ======================================= */
+        /* RESUMEN DEL PEDIDO                       */
+        /* ======================================= */
+        .order-summary {
+            background: rgba(247, 183, 51, 0.06);
+            border: 1px solid rgba(247, 183, 51, 0.15);
+            border-left: 4px solid var(--primary);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
+        }
 
-/* Botón Principal de Acción (WhatsApp) */
-#send-order-btn {
-    background-color: #25D366; /* Verde WhatsApp */
-    color: white;
-    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
-}
+        .order-summary p {
+            margin: 0 0 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
 
-#send-order-btn:hover {
-    background-color: #128C7E;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
-}
+        .order-summary p:last-child {
+            margin-bottom: 0;
+        }
 
-/* ======================================= */
-/* RESPONSIVE                */
-/* ======================================= */
+        .order-summary span {
+            font-weight: 700;
+            color: var(--primary);
+            text-align: right;
+            word-break: break-word;
+        }
 
-@media (max-width: 600px) {
-    .purchase-panel {
-        padding: 20px;
-        margin-top: 10px;
-    }
-    
-    .panel-title {
-        font-size: 1.6rem;
-    }
-    
-    .header-title h1 {
-        font-size: 1rem;
-    }
+        /* ======================================= */
+        /* BOTONES - TÁCTILES Y GRANDES             */
+        /* ======================================= */
+        button {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all var(--transition-base);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            -webkit-user-select: none;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .brand-grid {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        gap: 10px;
-    }
-    
-    .brand-icon {
-        width: 50px;
-        height: 50px;
-    }
-}
-</style>
+        button:active {
+            transform: scale(0.97);
+        }
 
+        .next-btn {
+            background: linear-gradient(135deg, var(--primary), #e6a020);
+            color: #0a0a0f;
+            box-shadow: 0 4px 20px var(--primary-glow);
+        }
 
- <main class="main-container">
-        <div class="purchase-panel"> 
-<body class="attention-grabber">
+        .next-btn:active {
+            box-shadow: 0 2px 10px var(--primary-glow);
+        }
 
+        .back-btn {
+            background: transparent;
+            border: 1.5px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 14px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:active {
+            background: var(--bg-card-hover);
+            border-color: var(--secondary);
+            color: var(--text-primary);
+        }
+
+        #send-order-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            margin-top: 20px;
+        }
+
+        #send-order-btn:active {
+            box-shadow: 0 2px 10px rgba(37, 211, 102, 0.5);
+        }
+
+        /* ======================================= */
+        /* RESPONSIVE - AJUSTES FINOS               */
+        /* ======================================= */
+        @media (min-width: 480px) {
+            .brand-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .brand-icon {
+                width: 58px;
+                height: 58px;
+            }
+            
+            .brand-item span {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-container {
+                padding: 24px;
+            }
+            
+            .purchase-panel {
+                max-width: 640px;
+                padding: 32px 28px;
+            }
+            
+            .panel-title {
+                font-size: 1.8rem;
+            }
+            
+            .brand-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 12px;
+            }
+            
+            .brand-item:hover {
+                transform: translateY(-3px);
+                background: var(--bg-card-hover);
+                border-color: var(--border-subtle);
+                box-shadow: var(--shadow-md);
+            }
+            
+            .dynamic-list li:hover {
+                background: var(--bg-card-hover);
+            }
+            
+            button:hover {
+                transform: translateY(-2px);
+            }
+            
+            .next-btn:hover {
+                box-shadow: 0 8px 30px var(--primary-glow);
+            }
+            
+            .back-btn:hover {
+                background: var(--bg-card-hover);
+                border-color: var(--secondary);
+                color: var(--text-primary);
+            }
+            
+            #send-order-btn:hover {
+                box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .brand-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        /* ======================================= */
+        /* ACCESIBILIDAD Y PREFERENCIAS             */
+        /* ======================================= */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-subtle);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Safe area para iPhone con notch */
+        @supports (padding: env(safe-area-inset-bottom)) {
+            body {
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+            
+            .page-header {
+                padding-top: max(12px, env(safe-area-inset-top));
+            }
+        }
+    </style>
+</head>
+<body>
     <header class="page-header">
         <div class="header-left">
             <div class="header-logo">
-                <img src="img\aa2.jpg" alt="Logo de la Tienda" title="Perfume Shop">
+                <img src="img/aa2.jpg" alt="Logo de la Tienda" title="Perfume Shop">
             </div>
             <div class="header-title">
-                <h1>Perfumería Exclusiva | Mis Fragancias Jhon Arias</h1>
+                <h1>Perfumería Exclusiva | Jhon Arias</h1>
             </div>
         </div>
-
-        <a href="index.html" class="btn-inicio-integrado">
-            Inicio
-        </a>
+        <a href="index.html" class="btn-inicio-integrado">Inicio</a>
     </header>
-    
-          
-            <h2 class="panel-title">Pagina de compras </h2>
+
+    <main class="main-container">
+        <div class="purchase-panel">
+            <h2 class="panel-title">Página de Compras</h2>
+            
             <div class="search-container">
-                <input type="text" id="perfume-search" placeholder="escribe el nombre de tu perfume te ayudo a buscar   ...">
+                <input type="text" id="perfume-search" placeholder="Busca tu perfume aquí...">
                 <div id="search-results" class="hidden"></div>
             </div>
             
+            <!-- PASO 1: SELECCIÓN DE MARCA -->
             <div id="step-1" class="step">
-                <h3 class="step-subtitle"> Selecciona una Marca</h3>
+                <h3 class="step-subtitle">Selecciona una Marca</h3>
                 <div class="brand-grid">
                     <div class="brand-item" data-brand="Carolina Herrera">
-                        <img src="img/carolina.jpg" alt="Carolina Herrera" class="brand-icon">
+                        <img src="img/carolina.jpg" alt="Carolina Herrera" class="brand-icon" loading="lazy">
                         <span>Carolina Herrera</span>
                     </div>
                     <div class="brand-item" data-brand="Paco Rabanne">
-                        <img src="img/paco.jpg" alt="Paco Rabanne" class="brand-icon">
+                        <img src="img/paco.jpg" alt="Paco Rabanne" class="brand-icon" loading="lazy">
                         <span>Paco Rabanne</span>
                     </div>
                     <div class="brand-item" data-brand="Lataffa">
-                        <img src="img/latafa.jpg" alt="Lataffa" class="brand-icon">
+                        <img src="img/latafa.jpg" alt="Lataffa" class="brand-icon" loading="lazy">
                         <span>Lataffa</span>
                     </div>
                     <div class="brand-item" data-brand="Hugo Boss">
-                        <img src="img/hugo.jpg" alt="Hugo Boss" class="brand-icon">
+                        <img src="img/hugo.jpg" alt="Hugo Boss" class="brand-icon" loading="lazy">
                         <span>Hugo Boss</span>
                     </div>
                     <div class="brand-item" data-brand="Lacoste">
-                        <img src="img/lacoste.jpg" alt="Lacoste" class="brand-icon">
+                        <img src="img/lacoste.jpg" alt="Lacoste" class="brand-icon" loading="lazy">
                         <span>Lacoste</span>
                     </div>
                     <div class="brand-item" data-brand="Yanbal">
-                        <img src="img/temp.jpg" alt="Yanbal" class="brand-icon">
+                        <img src="img/temp.jpg" alt="Yanbal" class="brand-icon" loading="lazy">
                         <span>Yanbal</span>
                     </div>
                     <div class="brand-item" data-brand="Victoria Secret">
-                        <img src="img/victoria.jpg" alt="Victoria Secret" class="brand-icon">
+                        <img src="img/victoria.jpg" alt="Victoria Secret" class="brand-icon" loading="lazy">
                         <span>Victoria Secret</span>
                     </div>
                     <div class="brand-item" data-brand="Jean Paul Gaultier">
-                        <img src="img/jean.jpg" alt="Jean Paul Gaultier" class="brand-icon">
+                        <img src="img/jean.jpg" alt="Jean Paul Gaultier" class="brand-icon" loading="lazy">
                         <span>Jean Paul Gaultier</span>
                     </div>
                     <div class="brand-item" data-brand="Montale">
-                        <img src="img/montale.jpg" alt="Montale" class="brand-icon">
+                        <img src="img/montale.jpg" alt="Montale" class="brand-icon" loading="lazy">
                         <span>Montale</span>
                     </div>
                     <div class="brand-item" data-brand="Ariana Grande">
-                        <img src="img/ariana.jpg" alt="Ariana Grande" class="brand-icon">
+                        <img src="img/ariana.jpg" alt="Ariana Grande" class="brand-icon" loading="lazy">
                         <span>Ariana Grande</span>
                     </div>
                     <div class="brand-item" data-brand="Versace">
-                        <img src="img/versace.jpg" alt="Versace" class="brand-icon">
+                        <img src="img/versace.jpg" alt="Versace" class="brand-icon" loading="lazy">
                         <span>Versace</span>
                     </div>
                     <div class="brand-item" data-brand="Calvin Klein">
-                        <img src="img/calvin.jpg" alt="Calvin Klein" class="brand-icon">
+                        <img src="img/calvin.jpg" alt="Calvin Klein" class="brand-icon" loading="lazy">
                         <span>Calvin Klein</span>
                     </div>
                     <div class="brand-item" data-brand="Ilmin">
-                        <img src="img/ilmin.jpg" alt="Ilmin" class="brand-icon">
+                        <img src="img/ilmin.jpg" alt="Ilmin" class="brand-icon" loading="lazy">
                         <span>Ilmin</span>
                     </div>
                     <div class="brand-item" data-brand="Moshino">
-                        <img src="img/moshino.jpg" alt="Moshino" class="brand-icon">
+                        <img src="img/moshino.jpg" alt="Moshino" class="brand-icon" loading="lazy">
                         <span>Moshino</span>
                     </div>
                     <div class="brand-item" data-brand="Armaf">
-                        <img src="img/armaf.jpg" alt="Armaf" class="brand-icon">
+                        <img src="img/armaf.jpg" alt="Armaf" class="brand-icon" loading="lazy">
                         <span>Armaf</span>
                     </div>
                     <div class="brand-item" data-brand="Giorgio Armani">
-                        <img src="img/giorgio.jpg" alt="Giorgio Armani" class="brand-icon">
+                        <img src="img/giorgio.jpg" alt="Giorgio Armani" class="brand-icon" loading="lazy">
                         <span>Giorgio Armani</span>
                     </div>
                     <div class="brand-item" data-brand="Chanel">
-                        <img src="img/chanel.jpg" alt="Chanel" class="brand-icon">
+                        <img src="img/chanel.jpg" alt="Chanel" class="brand-icon" loading="lazy">
                         <span>Chanel</span>
                     </div>
                     <div class="brand-item" data-brand="Escada">
-                        <img src="img/escada.jpg" alt="Escada" class="brand-icon">
+                        <img src="img/escada.jpg" alt="Escada" class="brand-icon" loading="lazy">
                         <span>Escada</span>
                     </div>
                     <div class="brand-item" data-brand="Afnan">
-                        <img src="img/9pm.jpg" alt="Afnan" class="brand-icon">
+                        <img src="img/9pm.jpg" alt="Afnan" class="brand-icon" loading="lazy">
                         <span>Afnan</span>
                     </div>
                     <div class="brand-item" data-brand="Antonio Banderas">
-                        <img src="img/antonio.jpg" alt="Antonio Banderas" class="brand-icon">
+                        <img src="img/antonio.jpg" alt="Antonio Banderas" class="brand-icon" loading="lazy">
                         <span>Antonio Banderas</span>
                     </div>
                     <div class="brand-item" data-brand="Dolce & Gabbana">
-                        <img src="img/dolce.jpg" alt="Dolce & Gabbana" class="brand-icon">
+                        <img src="img/dolce.jpg" alt="Dolce & Gabbana" class="brand-icon" loading="lazy">
                         <span>Dolce & Gabbana</span>
                     </div>
                     <div class="brand-item" data-brand="Christian Dior">
-                        <img src="img/dior.jpg" alt="Christian Dior" class="brand-icon">
+                        <img src="img/dior.jpg" alt="Christian Dior" class="brand-icon" loading="lazy">
                         <span>Christian Dior</span>
                     </div>
                     <div class="brand-item" data-brand="Diesel">
-                        <img src="img/diesel.jpg" alt="Diesel" class="brand-icon">
+                        <img src="img/diesel.jpg" alt="Diesel" class="brand-icon" loading="lazy">
                         <span>Diesel</span>
                     </div>
                     <div class="brand-item" data-brand="Orientica">
-                        <img src="img/orientica.jpg" alt="Orientica" class="brand-icon">
+                        <img src="img/orientica.jpg" alt="Orientica" class="brand-icon" loading="lazy">
                         <span>Orientica</span>
                     </div>
                     <div class="brand-item" data-brand="Ralph Lauren">
-                        <img src="img/ralp.jpg" alt="Ralph Lauren" class="brand-icon">
+                        <img src="img/ralp.jpg" alt="Ralph Lauren" class="brand-icon" loading="lazy">
                         <span>Ralph Lauren</span>
                     </div>
                     <div class="brand-item" data-brand="Al Haramain">
-                        <img src="img/alhara.jpg" alt="Al Haramain" class="brand-icon">
+                        <img src="img/alhara.jpg" alt="Al Haramain" class="brand-icon" loading="lazy">
                         <span>Al Haramain</span>
                     </div>
                     <div class="brand-item" data-brand="Bahara">
-                        <img src="img/bahara.jpg" alt="Bahara" class="brand-icon">
+                        <img src="img/bahara.jpg" alt="Bahara" class="brand-icon" loading="lazy">
                         <span>Bahara</span>
                     </div>
                     <div class="brand-item" data-brand="Ahli Fragrances">
-                        <img src="img/ahli.jpg" alt="Ahli Fragrances" class="brand-icon">
+                        <img src="img/ahli.jpg" alt="Ahli Fragrances" class="brand-icon" loading="lazy">
                         <span>Ahli Fragrances</span>
                     </div>
                     <div class="brand-item" data-brand="Bath & Bois">
-                        <img src="img/bath.jpg" alt="Bath & Bois" class="brand-icon">
+                        <img src="img/bath.jpg" alt="Bath & Bois" class="brand-icon" loading="lazy">
                         <span>Bath & Bois</span>
                     </div>
                     <div class="brand-item" data-brand="Parfumes de Marly">
-                        <img src="img/mary.jpg" alt="Parfumes de Marly" class="brand-icon">
+                        <img src="img/mary.jpg" alt="Parfumes de Marly" class="brand-icon" loading="lazy">
                         <span>Parfumes de Marly</span>
                     </div>
                     <div class="brand-item" data-brand="Valentino">
-                        <img src="img/valentino.jpg" alt="Valentino" class="brand-icon">
+                        <img src="img/valentino.jpg" alt="Valentino" class="brand-icon" loading="lazy">
                         <span>Valentino</span>
                     </div>
                     <div class="brand-item" data-brand="Animale">
-                        <img src="img/animale.jpg" alt="Animale" class="brand-icon">
+                        <img src="img/animale.jpg" alt="Animale" class="brand-icon" loading="lazy">
                         <span>Animale</span>
                     </div>
                     <div class="brand-item" data-brand="Esika">
-                        <img src="img/dorsay.jpg" alt="Esika" class="brand-icon">
+                        <img src="img/dorsay.jpg" alt="Esika" class="brand-icon" loading="lazy">
                         <span>Esika</span>
                     </div>
                     <div class="brand-item" data-brand="Sofia Vergara">
-                        <img src="img/sofia.jpg" alt="Sofia Vergara" class="brand-icon">
+                        <img src="img/sofia.jpg" alt="Sofia Vergara" class="brand-icon" loading="lazy">
                         <span>Sofia Vergara</span>
                     </div>
                     <div class="brand-item" data-brand="Tommy Hilfiger">
-                        <img src="img/thom.jpg" alt="Tommy Hilfiger" class="brand-icon">
+                        <img src="img/thom.jpg" alt="Tommy Hilfiger" class="brand-icon" loading="lazy">
                         <span>Tommy Hilfiger</span>
                     </div>
                     <div class="brand-item" data-brand="Benetton">
-                        <img src="img/tribu.jpg" alt="Benetton" class="brand-icon">
+                        <img src="img/tribu.jpg" alt="Benetton" class="brand-icon" loading="lazy">
                         <span>Benetton</span>
                     </div>
                     <div class="brand-item" data-brand="Burberry">
-                        <img src="img/bur.jpg" alt="Burberry" class="brand-icon">
+                        <img src="img/bur.jpg" alt="Burberry" class="brand-icon" loading="lazy">
                         <span>Burberry</span>
                     </div>
                     <div class="brand-item" data-brand="Giardini Di Toscana">
-                        <img src="img/giardini.jpg" alt="Giardini Di Toscana" class="brand-icon">
+                        <img src="img/giardini.jpg" alt="Giardini Di Toscana" class="brand-icon" loading="lazy">
                         <span>Giardini Di Toscana</span>
                     </div>
                     <div class="brand-item" data-brand="Agatha Ruiz de la Prada">
-                        <img src="img/gotas.jpg" alt="Agatha Ruiz de la Prada" class="brand-icon">
+                        <img src="img/gotas.jpg" alt="Agatha Ruiz de la Prada" class="brand-icon" loading="lazy">
                         <span>Agatha Ruiz de la Prada</span>
                     </div>
                 </div>
             </div>
             
+            <!-- PASO 2: SELECCIÓN DE PERFUME -->
             <div id="step-2" class="step hidden">
-                <h3 class="step-subtitle"> Selecciona un Perfume</h3>
-                <ul id="perfume-list" class="dynamic-list">
-                </ul>
+                <h3 class="step-subtitle">Selecciona un Perfume</h3>
+                <ul id="perfume-list" class="dynamic-list"></ul>
                 <button class="back-btn" data-step="1">Atrás</button>
             </div>
             
+            <!-- PASO 3: DETALLES Y RESUMEN -->
             <div id="step-3" class="step hidden">
                 <h3 class="step-subtitle">Detalles y Resumen</h3>
                 <div class="order-summary">
@@ -628,13 +905,13 @@ button {
                 <label for="size-select" class="label-select">Tamaño:</label>
                 <select name="perfume-size" id="size-select">
                     <option value="">-- Selecciona un tamaño --</option>
-                    <option value="30ml">PEQUEÑO $20.000</option>
-                    <option value="50ml">MEDIANO $40.000</option>
-                    <option value="100ml">GRANDE $70.000</option>
+                    <option value="30ml">Pequeño - $25.000</option>
+                    <option value="50ml">Mediano - $40.000</option>
+                    <option value="100ml">Grande - $70.000</option>
                 </select>
                 <label for="payment-method-select" class="label-select">Método de Pago:</label>
                 <select name="payment-method" id="payment-method-select">
-                    <option value="">-- Selecciona una metodo --</option>
+                    <option value="">-- Selecciona un método --</option>
                     <option value="nequi">Nequi</option>
                     <option value="efectivo">Efectivo contra entrega</option>
                     <option value="a-plazos">A plazos</option>
@@ -644,12 +921,13 @@ button {
                 <button class="back-btn" data-step="2">Atrás</button>
             </div>
             
+            <!-- PASO 4: CONFIRMACIÓN DE DATOS -->
             <div id="step-4" class="step hidden">
-                <h3 class="step-subtitle"> Confirma tus Datos</h3>
+                <h3 class="step-subtitle">Confirma tus Datos</h3>
                 <label for="client-name" class="label-input">Tu Nombre:</label>
-                <input type="text" id="client-name" placeholder="Ej. jhon arias">
+                <input type="text" id="client-name" placeholder="Ej. Jhon Arias" autocomplete="name">
                 <label for="client-phone" class="label-input">Tu Teléfono:</label>
-                <input type="tel" id="client-phone" placeholder="Ej. 3138094678">
+                <input type="tel" id="client-phone" placeholder="Ej. 3138094678" autocomplete="tel">
                 <button id="send-order-btn">Hacer la compra por WhatsApp</button>
                 <button class="back-btn" data-step="3">Atrás</button>
             </div>
