@@ -1,6 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
+    'use strict';
 
-    // ESTRUCTURA DE DATOS ORIGINAL CON TODOS LOS PERFUMES QUE ME PROPORCIONASTE
+    /* ============================================ */
+    /* CONFIGURACIÓN                                */
+    /* ============================================ */
+    const WHATSAPP_NUMERO = '573138094678'; // ⚠️ Cambia por tu número
+    const PRECIOS = {
+        '30ml': { precio: 25000, label: 'Pequeño (30ml)' },
+        '50ml': { precio: 40000, label: 'Mediano (50ml)' },
+        '100ml': { precio: 70000, label: 'Grande (100ml)' }
+    };
+    const COSTO_PLAZOS = 5000;
+
+    /* ============================================ */
+    /* ESTRUCTURA DE DATOS (tu data original)      */
+    /* ============================================ */
     const perfumeData = {
         'Carolina Herrera': [
             { nombre: 'Carolina Herrera dama' }, { nombre: 'CH dama' }, { nombre: '212 Sexy dama' },
@@ -228,200 +242,344 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
-    // Obtenemos los elementos del DOM
-    const steps = document.querySelectorAll('.step');
-    const brandItems = document.querySelectorAll('.brand-item');
-    const perfumeList = document.getElementById('perfume-list');
-    const backButtons = document.querySelectorAll('.back-btn');
-    const nextButton = document.querySelector('.next-btn[data-step="4"]');
-    const sendOrderBtn = document.getElementById('send-order-btn');
-    const searchInput = document.getElementById('perfume-search');
-
-    // Variables para almacenar la selección del usuario
-    let selectedBrand = '';
-    let selectedPerfume = '';
-    let selectedSize = ''; 
-    let selectedPayment = ''; 
-
-    // Función para mostrar un paso y ocultar los demás
-    const showStep = (stepId) => {
-        steps.forEach(step => {
-            step.classList.add('hidden');
-        });
-        document.getElementById(stepId).classList.remove('hidden');
+    /* ============================================ */
+    /* ESTADO GLOBAL                                */
+    /* ============================================ */
+    const state = {
+        brand: '',
+        perfume: '',
+        size: '',
+        sizeLabel: '',
+        price: 0,
+        payment: '',
+        paymentLabel: '',
+        clientName: '',
+        clientPhone: ''
     };
 
-    // Función para actualizar el resumen BÁSICO (Marca y Perfume)
-    const updateBasicSummary = () => {
-        document.getElementById('summary-brand').textContent = selectedBrand;
-        document.getElementById('summary-perfume').textContent = selectedPerfume;
-    };
-    
-    // Función para actualizar el resumen COMPLETO (Paso 4)
-    const updateFinalSummary = () => {
-        document.getElementById('summary-brand').textContent = selectedBrand;
-        document.getElementById('summary-perfume').textContent = selectedPerfume;
-        
-        // Se asegura de que los elementos existan antes de actualizar el texto
-        const summarySizeElement = document.getElementById('summary-size');
-        const summaryPaymentElement = document.getElementById('summary-payment');
+    /* ============================================ */
+    /* UTILIDADES                                   */
+    /* ============================================ */
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
 
-        if (summarySizeElement) {
-            summarySizeElement.textContent = selectedSize;
-        }
-        if (summaryPaymentElement) {
-            summaryPaymentElement.textContent = selectedPayment;
+    function formatearPrecio(valor) {
+        return '$' + valor.toLocaleString('es-CO');
+    }
+
+    function scrollToStep(stepId) {
+        const el = document.getElementById(stepId);
+        if (!el) return;
+        const yOffset = -80; // compensa el header sticky
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    function debounce(fn, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => fn.apply(this, args), delay);
+        };
+    }
+
+    /* ============================================ */
+    /* NAVEGACIÓN ENTRE PASOS                       */
+    /* ============================================ */
+    function showStep(stepId) {
+        $$('.step').forEach(s => s.classList.add('hidden'));
+        const target = document.getElementById(stepId);
+        if (target) target.classList.remove('hidden');
+        scrollToStep(stepId);
+    }
+
+    /* ============================================ */
+    /* RENDER: RESUMEN                              */
+    /* ============================================ */
+    function updateSummary() {
+        const set = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = val;
+        };
+
+        set('summary-brand', state.brand);
+        set('summary-perfume', state.perfume);
+        set('summary-size', state.sizeLabel);
+        set('summary-payment', state.paymentLabel);
+
+        // Precio total si existe el contenedor
+        const priceEl = document.getElementById('summary-price');
+        if (priceEl) {
+            let total = state.price;
+            if (state.payment === 'a-plazos') total += COSTO_PLAZOS;
+            priceEl.textContent = formatearPrecio(total);
         }
     }
 
+    /* ============================================ */
+    /* RENDER: LISTA DE PERFUMES                    */
+    /* ============================================ */
+    function createPerfumeList(brand) {
+        const perfumeList = $('#perfume-list');
+        if (!perfumeList) return;
 
-    // Función para crear la lista de perfumes
-    const createPerfumeList = (brand) => {
         perfumeList.innerHTML = '';
         const perfumes = perfumeData[brand] || [];
-        if (perfumes.length > 0) {
-            perfumes.forEach(perfume => {
-                const li = document.createElement('li');
-                li.textContent = perfume.nombre;
-                li.classList.add('perfume-item');
-                li.addEventListener('click', () => {
-                    selectedPerfume = perfume.nombre;
-                    updateBasicSummary();
-                    showStep('step-3'); // Pasa al paso 3 (Selección de Tamaño/Pago)
-                });
-                perfumeList.appendChild(li);
-            });
-        } else {
+
+        if (perfumes.length === 0) {
             const li = document.createElement('li');
             li.textContent = `No hay perfumes disponibles para ${brand}.`;
+            li.style.cursor = 'default';
             perfumeList.appendChild(li);
+            return;
         }
-    };
 
-    // Event listeners para la selección de marca
-    brandItems.forEach(item => {
-        item.addEventListener('click', () => {
-            selectedBrand = item.dataset.brand;
-            createPerfumeList(selectedBrand);
-            showStep('step-2');
-        });
-    });
+        perfumes.forEach(perfume => {
+            const li = document.createElement('li');
+            li.textContent = perfume.nombre;
+            li.classList.add('perfume-item');
+            li.dataset.perfume = perfume.nombre;
 
-    // Event listener para los botones de "Atrás"
-    backButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetStep = button.dataset.step;
-            showStep(`step-${targetStep}`);
-        });
-    });
+            li.addEventListener('click', () => {
+                // Marcar visualmente
+                perfumeList.querySelectorAll('li').forEach(el => el.classList.remove('selected'));
+                li.classList.add('selected');
 
-    // 🚀 EVENT LISTENER CORREGIDO: Botón "Siguiente" (del paso 3 al 4)
-    if (nextButton) {
-        nextButton.addEventListener('click', () => {
-            selectedSize = document.getElementById('size-select').value;
-            selectedPayment = document.getElementById('payment-method-select').value;
-            
-            // Verificación de selección válida
-            if (selectedSize && selectedPayment && selectedSize !== 'default' && selectedPayment !== 'default') {
-                updateFinalSummary(); // Actualiza el resumen completo para el Paso 4
-                showStep('step-4'); // Pasa al paso 4 (Datos del cliente)
-            } else {
-                alert('Por favor, selecciona un tamaño y un método de pago válidos.');
-            }
+                state.perfume = perfume.nombre;
+                updateSummary();
+                showStep('step-3');
+            });
+
+            perfumeList.appendChild(li);
         });
     }
 
-    // 📲 FUNCIÓN WHATSAPP (Corregida con número y formato de mensaje)
-    if (sendOrderBtn) {
-        sendOrderBtn.addEventListener('click', () => {
-            const clientName = document.getElementById('client-name').value.trim();
-            const clientPhone = document.getElementById('client-phone').value.trim();
+    /* ============================================ */
+    /* SELECCIÓN DE MARCA                           */
+    /* ============================================ */
+    function selectBrand(brandName) {
+        state.brand = brandName;
+        state.perfume = '';
+        state.size = '';
+        state.sizeLabel = '';
+        state.price = 0;
+        state.payment = '';
+        state.paymentLabel = '';
 
-            // ⚠️ Número de Teléfono de WhatsApp - ¡CAMBIA ESTE NÚMERO!
-            const whatsappNumber = '573138094678'; // 🚨 REEMPLAZA CON TU NÚMERO REAL (CódigoPaís+Número)
+        // Marcar visualmente
+        $$('.brand-item').forEach(item => {
+            item.classList.toggle('selected', item.dataset.brand === brandName);
+        });
 
-            if (!clientName || !clientPhone) {
-                alert('Por favor, completa tu nombre y teléfono para enviar el pedido.');
+        createPerfumeList(brandName);
+        showStep('step-2');
+    }
+
+    function initBrandItems() {
+        $$('.brand-item').forEach(item => {
+            item.addEventListener('click', () => {
+                selectBrand(item.dataset.brand);
+            });
+        });
+    }
+
+    /* ============================================ */
+    /* BOTONES ATRÁS                                */
+    /* ============================================ */
+    function initBackButtons() {
+        $$('.back-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetStep = button.dataset.step;
+                showStep(`step-${targetStep}`);
+            });
+        });
+    }
+
+    /* ============================================ */
+    /* PASO 3 → 4 (Validación)                      */
+    /* ============================================ */
+    function initNextButton() {
+        const nextButton = $('.next-btn[data-step="4"]');
+        if (!nextButton) return;
+
+        nextButton.addEventListener('click', () => {
+            const sizeSelect = $('#size-select');
+            const paymentSelect = $('#payment-method-select');
+
+            const sizeValue = sizeSelect.value;
+            const paymentValue = paymentSelect.value;
+
+            if (!sizeValue || !PRECIOS[sizeValue]) {
+                alert('Por favor, selecciona un tamaño válido.');
+                sizeSelect.focus();
+                return;
+            }
+            if (!paymentValue) {
+                alert('Por favor, selecciona un método de pago.');
+                paymentSelect.focus();
                 return;
             }
 
-            // Construcción del mensaje con formato WhatsApp (usando %0A para saltos de línea y * para negrita)
-            let message = `¡Hola! mi pedido es.\n`;
-                message += `*Perfume:* ${selectedPerfume} (${selectedBrand})\n`;
-                message += `*Tamaño:* ${selectedSize}\n`;
-                message += `*Método de Pago:* ${selectedPayment}\n`;
-                message += `*Nombre:* ${clientName}\n`;
-                message += `*Teléfono:* ${clientPhone}`;
+            state.size = sizeValue;
+            state.sizeLabel = PRECIOS[sizeValue].label;
+            state.price = PRECIOS[sizeValue].precio;
 
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-            
-            window.open(whatsappUrl, '_blank');
+            state.payment = paymentValue;
+            state.paymentLabel = paymentSelect.options[paymentSelect.selectedIndex].text;
+
+            updateSummary();
+            showStep('step-4');
         });
     }
 
-    // --- FUNCIONALIDAD DE BÚSQUEDA ---
+    /* ============================================ */
+    /* ENVÍO POR WHATSAPP                           */
+    /* ============================================ */
+    function initSendOrder() {
+        const sendBtn = $('#send-order-btn');
+        if (!sendBtn) return;
 
-    // 1. Crear un array de todos los perfumes para la búsqueda
-    const allPerfumes = [];
-    for (const brand in perfumeData) {
-        perfumeData[brand].forEach(perfume => {
-            allPerfumes.push({ name: perfume.nombre, brand: brand });
-        });
-    }
+        sendBtn.addEventListener('click', () => {
+            const clientName = $('#client-name').value.trim();
+            const clientPhone = $('#client-phone').value.trim();
 
-    // 2. Event listener para el campo de búsqueda
-    searchInput.addEventListener('input', () => {
-        const query = searchInput.value.toLowerCase().trim();
-        const resultsContainer = document.getElementById('search-results');
-        
-        resultsContainer.innerHTML = ''; 
-        resultsContainer.classList.add('hidden'); 
-
-        if (query.length > 1) { 
-            const matches = allPerfumes.filter(p => p.name.toLowerCase().includes(query));
-            
-            if (matches.length > 0) {
-                resultsContainer.classList.remove('hidden');
-                matches.forEach(match => {
-                    const resultItem = document.createElement('div');
-                    resultItem.classList.add('search-result-item');
-                    resultItem.textContent = `${match.name} (${match.brand})`;
-                    resultItem.addEventListener('click', () => {
-                        // Simular la selección
-                        const brandElement = document.querySelector(`.brand-item[data-brand="${match.brand}"]`);
-                        if (brandElement) {
-                            // 1. Simular clic en la marca para cargar la lista de perfumes (Paso 2)
-                            selectedBrand = match.brand;
-                            createPerfumeList(selectedBrand);
-                            showStep('step-2');
-                            
-                            // 2. Pasar directamente al Paso 3 con el perfume seleccionado
-                            selectedPerfume = match.name;
-                            updateBasicSummary();
-                            showStep('step-3');
-
-                        }
-                        searchInput.value = ''; 
-                        resultsContainer.classList.add('hidden');
-                    });
-                    resultsContainer.appendChild(resultItem);
-                });
+            if (!clientName) {
+                alert('Por favor, ingresa tu nombre.');
+                $('#client-name').focus();
+                return;
             }
-        }
-    });
+            if (!clientPhone || clientPhone.length < 7) {
+                alert('Por favor, ingresa un teléfono válido.');
+                $('#client-phone').focus();
+                return;
+            }
 
-    // 3. Ocultar los resultados de la búsqueda al hacer clic fuera
-    document.addEventListener('click', (event) => {
-        const searchContainer = document.querySelector('.search-container');
-        const resultsContainer = document.getElementById('search-results');
-        // Asegúrate de que no se oculte si se hace clic dentro del contenedor de búsqueda.
-        if (resultsContainer && searchContainer && !searchContainer.contains(event.target)) {
-            resultsContainer.classList.add('hidden');
+            state.clientName = clientName;
+            state.clientPhone = clientPhone;
+
+            let total = state.price;
+            let notaPago = state.paymentLabel;
+            if (state.payment === 'a-plazos') {
+                total += COSTO_PLAZOS;
+                notaPago += ` (+${formatearPrecio(COSTO_PLAZOS)})`;
+            }
+
+            const mensaje =
+`🛍️ *NUEVO PEDIDO - Perfumería Jhon Arias*
+
+👤 *Cliente:* ${state.clientName}
+📱 *Teléfono:* ${state.clientPhone}
+
+🌸 *Marca:* ${state.brand}
+💐 *Perfume:* ${state.perfume}
+📦 *Tamaño:* ${state.sizeLabel}
+💳 *Método de pago:* ${notaPago}
+💰 *Total:* ${formatearPrecio(total)}
+
+¡Quedo atento a la confirmación! 🙌`;
+
+            const encoded = encodeURIComponent(mensaje);
+            const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encoded}`;
+
+            try {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            } catch (e) {
+                // Fallback si el navegador bloquea popups
+                window.location.href = url;
+            }
+        });
+    }
+
+    /* ============================================ */
+    /* BUSCADOR CON DEBOUNCE                        */
+    /* ============================================ */
+    function initSearch() {
+        const searchInput = $('#perfume-search');
+        const resultsContainer = $('#search-results');
+        if (!searchInput || !resultsContainer) return;
+
+        // Pre-indexar perfumes
+        const allPerfumes = [];
+        for (const brand in perfumeData) {
+            perfumeData[brand].forEach(p => {
+                allPerfumes.push({ name: p.nombre, brand });
+            });
         }
-    });
+
+        const performSearch = debounce((query) => {
+            resultsContainer.innerHTML = '';
+
+            if (query.length < 2) {
+                resultsContainer.classList.add('hidden');
+                return;
+            }
+
+            const matches = allPerfumes.filter(p =>
+                p.name.toLowerCase().includes(query) ||
+                p.brand.toLowerCase().includes(query)
+            );
+
+            if (matches.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = 'search-result-item';
+                empty.textContent = 'Sin resultados';
+                empty.style.cursor = 'default';
+                resultsContainer.appendChild(empty);
+                resultsContainer.classList.remove('hidden');
+                return;
+            }
+
+            matches.slice(0, 10).forEach(match => {
+                const item = document.createElement('div');
+                item.className = 'search-result-item';
+                item.textContent = `${match.name} — ${match.brand}`;
+
+                item.addEventListener('click', () => {
+                    // Marcar marca y cargar perfumes
+                    selectBrand(match.brand);
+
+                    // Auto-seleccionar el perfume buscado
+                    setTimeout(() => {
+                        const perfumeLi = document.querySelector(
+                            `#perfume-list li[data-perfume="${CSS.escape(match.name)}"]`
+                        );
+                        if (perfumeLi) {
+                            perfumeLi.click();
+                        }
+                    }, 50);
+
+                    searchInput.value = '';
+                    resultsContainer.classList.add('hidden');
+                });
+
+                resultsContainer.appendChild(item);
+            });
+
+            resultsContainer.classList.remove('hidden');
+        }, 200);
+
+        searchInput.addEventListener('input', function () {
+            performSearch(this.value.toLowerCase().trim());
+        });
+
+        // Cerrar al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            const container = e.target.closest('.search-container');
+            if (!container) {
+                resultsContainer.classList.add('hidden');
+            }
+        });
+    }
+
+    /* ============================================ */
+    /* INICIALIZACIÓN                               */
+    /* ============================================ */
+    initBrandItems();
+    initBackButtons();
+    initNextButton();
+    initSendOrder();
+    initSearch();
 
 });
-
 
 
